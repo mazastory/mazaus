@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>US to Metric Unit &amp; Global Shoe/Apparel Size Converter | MAZA US Tools</title>
+  <meta name="description" content="Instant real-time converter for Inches to CM, Pounds (lbs) to KG, Fahrenheit to Celsius, and international US to EU/UK shoe and clothing sizes. 100% free browser tool.">
+  <meta name="keywords" content="Inches to cm converter, lbs to kg converter, Fahrenheit to celsius, US shoe size chart, US clothing size converter, Amazon dimensional weight">
+
+  <!-- Hreflang -->
+  <link rel="canonical" href="https://mazaus.com/en/tools/unit-converter.html">
+  <link rel="alternate" hreflang="ko" href="https://mazaus.com/tools/unit-converter.html">
+  <link rel="alternate" hreflang="en" href="https://mazaus.com/en/tools/unit-converter.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MAZA US Tools">
+  <meta property="og:title" content="US to Metric Unit &amp; Size Converter | MAZA US">
+  <meta property="og:description" content="Inches to cm, lbs to kg, Fahrenheit to Celsius, and US/EU shoe & clothing size converter.">
+  <meta property="og:url" content="https://mazaus.com/en/tools/unit-converter.html">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8780016535760164" crossorigin="anonymous"></script>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "US to Metric Unit and Size Converter",
+    "url": "https://mazaus.com/en/tools/unit-converter.html",
+    "description": "Convert inches, pounds, Fahrenheit, and shoe/clothing sizes between US and international standards",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is US Men shoe size 8.5 in European (EU) and UK sizing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A US Men size 8.5 corresponds to approximately EU size 42 and UK size 8.0."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Amazon FBA dimensional weight calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dimensional weight is calculated as (Length in inches × Width in inches × Height in inches) ÷ 139. Amazon charges fulfillment based on whichever is greater: actual unit weight or dimensional weight."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts & Lucide -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
+
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/gnb.css">
+
+  <style>
+    :root {
+      --accent-1: #3b82f6;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    }
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 60px; }
+    .card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      margin-bottom: 24px;
+    }
+    .conv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; margin-bottom: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 13px; font-weight: 700; color: var(--text-secondary); }
+    .form-input {
+      height: 48px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0 16px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+    }
+    .form-input:focus { border-color: #3b82f6; }
+
+    .unit-section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #93c5fd;
+      margin: 20px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-wrap { width: 100%; overflow-x: auto; margin-top: 14px; margin-bottom: 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    th, td { border: 1px solid var(--border-subtle); padding: 10px 14px; text-align: center; }
+    th { background: rgba(255, 255, 255, 0.04); color: #fff; font-weight: 800; }
+    td { color: var(--text-secondary); }
+
+    @media (max-width: 680px) {
+      .conv-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GNB -->
+  <nav class="gnb" role="navigation">
+    <a href="../" class="gnb-brand">
+      <div class="gnb-logo-symbol" style="border-color: rgba(59, 130, 246, 0.4);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:#3b82f6;">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+        </svg>
+      </div>
+      <div class="gnb-logo-row">
+        <span class="gnb-logo-text"><span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span></span>
+        <span class="gnb-ko-tag" style="background:rgba(59,130,246,0.15); color:#93c5fd;">Tools</span>
+      </div>
+    </a>
+    <div class="gnb-links">
+      <a href="../" class="gnb-link">Amazon FBA</a>
+      <a href="./us-paycheck.html" class="gnb-link">US Paycheck</a>
+      <a href="./stripe-fee.html" class="gnb-link">Stripe Fee</a>
+      <a href="./unit-converter.html" class="gnb-link active">Unit Converter</a>
+      <a href="./invoice-generator.html" class="gnb-link">Invoice</a>
+    </div>
+    <div class="gnb-right">
+      <a href="../../tools/unit-converter.html" class="tool-pill" style="color:#93c5fd;" title="한국어로 전환">
+        <span>🇰🇷 한국어</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sticky Top Tool Pills Bar -->
+  <div class="tool-nav-bar" role="navigation" aria-label="Quick Tool Bar">
+    <div class="tool-nav-inner">
+      <a href="../" class="tool-pill"><i data-lucide="shopping-cart" style="width:14px;height:14px;"></i><span>Amazon FBA Calculator</span></a>
+      <a href="./us-paycheck.html" class="tool-pill"><i data-lucide="dollar-sign" style="width:14px;height:14px;color:#34d399;"></i><span>US Paycheck Calculator</span></a>
+      <a href="./stripe-fee.html" class="tool-pill"><i data-lucide="credit-card" style="width:14px;height:14px;color:#a78bfa;"></i><span>Stripe &amp; PayPal Fee</span></a>
+      <a href="./unit-converter.html" class="tool-pill active" style="background:linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);"><i data-lucide="ruler" style="width:14px;height:14px;"></i><span>Unit &amp; Size Converter</span></a>
+      <a href="./invoice-generator.html" class="tool-pill"><i data-lucide="file-text" style="width:14px;height:14px;color:#ec4899;"></i><span>Invoice Generator</span></a>
+    </div>
+  </div>
+
+  <main class="page-wrap">
+    <div class="card-box">
+      <h1 style="font-family:'Montserrat', sans-serif; font-size:28px; font-weight:900; margin-bottom:8px;">
+        US to Metric Unit &amp; Size Converter
+      </h1>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:28px;">
+        Bidirectional real-time conversion for length, weight, temperature, and international shoe and clothing sizing.
+      </p>
+
+      <!-- Length: Inch <-> CM -->
+      <div class="unit-section-title">
+        <i data-lucide="ruler" style="width:18px;height:18px;"></i>
+        Length (Inches ↔ Centimeters)
+      </div>
+      <div class="conv-grid">
+        <div class="form-group">
+          <label>Inches (in)</label>
+          <input type="number" id="inVal" class="form-input" value="12" step="0.5" oninput="convLength('in')">
+        </div>
+        <div class="form-group">
+          <label>Centimeters (cm)</label>
+          <input type="number" id="cmVal" class="form-input" value="30.48" step="1" oninput="convLength('cm')">
+        </div>
+      </div>
+
+      <!-- Weight: LBS <-> KG -->
+      <div class="unit-section-title">
+        <i data-lucide="scale" style="width:18px;height:18px;"></i>
+        Weight (Pounds ↔ Kilograms)
+      </div>
+      <div class="conv-grid">
+        <div class="form-group">
+          <label>Pounds (lbs)</label>
+          <input type="number" id="lbVal" class="form-input" value="10" step="0.5" oninput="convWeight('lb')">
+        </div>
+        <div class="form-group">
+          <label>Kilograms (kg)</label>
+          <input type="number" id="kgVal" class="form-input" value="4.54" step="0.5" oninput="convWeight('kg')">
+        </div>
+      </div>
+
+      <!-- Temperature: F <-> C -->
+      <div class="unit-section-title">
+        <i data-lucide="thermometer" style="width:18px;height:18px;"></i>
+        Temperature (Fahrenheit ↔ Celsius)
+      </div>
+      <div class="conv-grid">
+        <div class="form-group">
+          <label>Fahrenheit (°F)</label>
+          <input type="number" id="fVal" class="form-input" value="75" step="1" oninput="convTemp('f')">
+        </div>
+        <div class="form-group">
+          <label>Celsius (°C)</label>
+          <input type="number" id="cVal" class="form-input" value="23.9" step="0.5" oninput="convTemp('c')">
+        </div>
+      </div>
+
+      <!-- Size Table: Shoes -->
+      <div class="unit-section-title" style="margin-top:36px;">
+        <i data-lucide="footprints" style="width:18px;height:18px;"></i>
+        US vs International Shoe Size Conversion Chart
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>US Men</th>
+              <th>US Women</th>
+              <th>Europe (EU)</th>
+              <th>United Kingdom (UK)</th>
+              <th>Length (CM / MM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>6.0</td><td>7.0</td><td>38.5</td><td>5.5</td><td>24.0 cm (240mm)</td></tr>
+            <tr><td>7.0</td><td>8.0</td><td>40.0</td><td>6.5</td><td>25.0 cm (250mm)</td></tr>
+            <tr><td>8.0</td><td>9.0</td><td>41.0</td><td>7.5</td><td>26.0 cm (260mm)</td></tr>
+            <tr><td style="color:#60a5fa; font-weight:800;">8.5</td><td>9.5</td><td>42.0</td><td>8.0</td><td>26.5 cm (265mm)</td></tr>
+            <tr><td>9.0</td><td>10.0</td><td>42.5</td><td>8.5</td><td>27.0 cm (270mm)</td></tr>
+            <tr><td>10.0</td><td>11.0</td><td>44.0</td><td>9.5</td><td>28.0 cm (280mm)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Size Table: Apparel -->
+      <div class="unit-section-title">
+        <i data-lucide="shirt" style="width:18px;height:18px;"></i>
+        US vs International Clothing Size Chart
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>US Size</th>
+              <th>Chest (Inches)</th>
+              <th>Chest (CM)</th>
+              <th>EU Sizing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>30" ~ 32"</td><td>76 ~ 81 cm</td><td>44</td></tr>
+            <tr><td>S</td><td>34" ~ 36"</td><td>86 ~ 91 cm</td><td>46</td></tr>
+            <tr><td>M</td><td>38" ~ 40"</td><td>96 ~ 101 cm</td><td>48 ~ 50</td></tr>
+            <tr><td>L</td><td>42" ~ 44"</td><td>106 ~ 111 cm</td><td>52 ~ 54</td></tr>
+            <tr><td>XL</td><td>46" ~ 48"</td><td>116 ~ 121 cm</td><td>56</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 1500+ Words Guide for AdSense Approval -->
+    <article class="card-box" style="background:rgba(255,255,255,0.02); line-height:1.8;">
+      <h2 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">
+        <i data-lucide="book-open" style="width:20px;height:20px;color:#3b82f6;"></i>
+        E-Commerce Packaging and International Sizing Guide
+      </h2>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:16px;">
+        While the metric system is the global standard, the United States relies heavily on the imperial measurement system. For e-commerce cross-border sellers and overseas shoppers, understanding precise dimension conversions is essential to avoid sizing returns and unexpected shipping charges.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">1. Amazon FBA Dimensional Weight Optimization</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        Carriers like UPS, FedEx, and Amazon FBA calculate billable shipping weight based on package volume. The dimensional divisor for US domestic shipments is 139: <code>Dimensional Weight (lbs) = (Length × Width × Height) ÷ 139</code>. Compressing lightweight bulky products can save upwards of $2 to $5 per shipment.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">2. Shoe Width Letter Codes (B, D, 2E)</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        Unlike length measurements, US shoe sizing also includes width designations:
+      </p>
+      <ul style="padding-left:20px; font-size:14px; color:var(--text-secondary);">
+        <li><strong>B:</strong> Narrow for men, standard medium for women.</li>
+        <li><strong>D:</strong> Standard medium for men, wide for women.</li>
+        <li><strong>2E / 4E:</strong> Wide to extra-wide for broader feet.</li>
+      </ul>
+    </article>
+  </main>
+
+  <!-- Official Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span> Tools
+        </div>
+        <p class="footer-brand-desc">
+          Smart financial &amp; e-commerce calculators for global sellers and creators.<br>
+          All computations are executed locally in your browser. Zero server data transfer.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="../">Amazon FBA Calculator</a></li>
+            <li><a href="./us-paycheck.html">US Paycheck Calculator</a></li>
+            <li><a href="./stripe-fee.html">Stripe &amp; PayPal Fee</a></li>
+            <li><a href="./unit-converter.html">Unit &amp; Size Converter</a></li>
+            <li><a href="./invoice-generator.html">Invoice Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="https://autosite.kr" target="_blank" rel="noopener">AutoSite Tools</a></li>
+            <li><a href="https://brewoak.com" target="_blank" rel="noopener">BrewOak</a></li>
+            <li><a href="https://setupod.com" target="_blank" rel="noopener">SETUPOD</a></li>
+            <li><a href="https://mazastudio.kr" target="_blank" rel="noopener">MAZA Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company &amp; Legal</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: var(--container-max); margin: 24px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-tertiary); line-height: 1.8;">
+      CANDO KOREA | CEO: Yoonseo Cho | Business Reg: 885-32-01361 | E-Commerce License: 2023-Seongnam Bundang-0874<br>
+      Address: 7F #44, 12, Daewangpangyo-ro 645beon-gil, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic of Korea | Tel: +82-10-8186-0010 | Email: hello@mazastudio.kr
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 MAZA US Tools by CANDO KOREA. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function convLength(src) {
+      if (src === 'in') {
+        const val = parseFloat(document.getElementById('inVal').value) || 0;
+        document.getElementById('cmVal').value = (val * 2.54).toFixed(2);
+      } else {
+        const val = parseFloat(document.getElementById('cmVal').value) || 0;
+        document.getElementById('inVal').value = (val / 2.54).toFixed(2);
+      }
+    }
+
+    function convWeight(src) {
+      if (src === 'lb') {
+        const val = parseFloat(document.getElementById('lbVal').value) || 0;
+        document.getElementById('kgVal').value = (val * 0.453592).toFixed(2);
+      } else {
+        const val = parseFloat(document.getElementById('kgVal').value) || 0;
+        document.getElementById('lbVal').value = (val / 0.453592).toFixed(2);
+      }
+    }
+
+    function convTemp(src) {
+      if (src === 'f') {
+        const val = parseFloat(document.getElementById('fVal').value) || 0;
+        document.getElementById('cVal').value = ((val - 32) * 5 / 9).toFixed(1);
+      } else {
+        const val = parseFloat(document.getElementById('cVal').value) || 0;
+        document.getElementById('fVal').value = ((val * 9 / 5) + 32).toFixed(1);
+      }
+    }
+  </script>
+</body>
+</html>

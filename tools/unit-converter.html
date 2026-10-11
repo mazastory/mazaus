@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>미국-한국 글로벌 단위 &amp; 의류/신발 사이즈 변환기 | MAZA US Tools</title>
+  <meta name="description" content="인치(inch) ↔ 센티미터(cm), 파운드(lb) ↔ 킬로그램(kg), 화씨(°F) ↔ 섭씨(°C), 온스(oz) ↔ 밀리리터(ml) 및 미국·한국 신발·의류 사이즈 실시간 상호 변환기.">
+  <meta name="keywords" content="인치 cm 변환, 파운드 kg 변환, 미국 신발 사이즈, 미국 의류 사이즈표, 화씨 섭씨 변환, 아마존 규격 변환, 미국 해외직구 사이즈">
+
+  <!-- Hreflang -->
+  <link rel="canonical" href="https://mazaus.com/tools/unit-converter.html">
+  <link rel="alternate" hreflang="ko" href="https://mazaus.com/tools/unit-converter.html">
+  <link rel="alternate" hreflang="en" href="https://mazaus.com/en/tools/unit-converter.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MAZA US Tools">
+  <meta property="og:title" content="미국-한국 글로벌 단위 &amp; 사이즈 변환기 | MAZA US">
+  <meta property="og:description" content="인치/cm, 파운드/kg, 화씨/섭씨 및 미국-한국 의류 신발 사이즈 실시간 변환">
+  <meta property="og:url" content="https://mazaus.com/tools/unit-converter.html">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8780016535760164" crossorigin="anonymous"></script>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "미국-한국 단위 및 사이즈 변환기",
+    "url": "https://mazaus.com/tools/unit-converter.html",
+    "description": "인치, 파운드, 화씨 및 미국/한국 신발 의류 사이즈 실시간 상호 변환 도구",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "미국 신발 사이즈 US 8.5는 한국 사이즈로 몇 mm인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "미국 남성 신발 사이즈 US 8.5는 한국 기준 약 265mm이며, 여성 신발 US 8.5는 한국 기준 약 255mm에 해당합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "아마존 FBA의 부피 무게(Dimensional Weight) 계산 공식은 어떻게 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "아마존 US 물류 기준 부피 무게는 (가로 inch × 세로 inch × 높이 inch) ÷ 139 파운드(lb)로 계산됩니다. 실제 중량과 부피 중량 중 더 큰 값을 기준으로 FBA 배송비가 산정됩니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts & Lucide -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/gnb.css">
+
+  <style>
+    :root {
+      --accent-1: #3b82f6;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    }
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 60px; }
+    .card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      margin-bottom: 24px;
+    }
+    .conv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; margin-bottom: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 13px; font-weight: 700; color: var(--text-secondary); }
+    .form-input {
+      height: 48px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0 16px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+    }
+    .form-input:focus { border-color: #3b82f6; }
+
+    .unit-section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #93c5fd;
+      margin: 20px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-wrap { width: 100%; overflow-x: auto; margin-top: 14px; margin-bottom: 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    th, td { border: 1px solid var(--border-subtle); padding: 10px 14px; text-align: center; }
+    th { background: rgba(255, 255, 255, 0.04); color: #fff; font-weight: 800; }
+    td { color: var(--text-secondary); }
+
+    @media (max-width: 680px) {
+      .conv-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GNB -->
+  <nav class="gnb" role="navigation">
+    <a href="../" class="gnb-brand">
+      <div class="gnb-logo-symbol" style="border-color: rgba(59, 130, 246, 0.4);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:#3b82f6;">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+        </svg>
+      </div>
+      <div class="gnb-logo-row">
+        <span class="gnb-logo-text"><span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span></span>
+        <span class="gnb-ko-tag" style="background:rgba(59,130,246,0.15); color:#93c5fd;">Tools</span>
+      </div>
+    </a>
+    <div class="gnb-links">
+      <a href="../" class="gnb-link">아마존 계산기</a>
+      <a href="./us-paycheck.html" class="gnb-link">미국 연봉 실수령액</a>
+      <a href="./stripe-fee.html" class="gnb-link">스트라이프 수수료</a>
+      <a href="./unit-converter.html" class="gnb-link active">단위 변환기</a>
+      <a href="./invoice-generator.html" class="gnb-link">영문 인보이스</a>
+    </div>
+    <div class="gnb-right">
+      <a href="../en/tools/unit-converter.html" class="tool-pill" style="color:#93c5fd;" title="Switch to English">
+        <span>🇺🇸 English</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sticky Top Tool Pills Bar -->
+  <div class="tool-nav-bar" role="navigation" aria-label="빠른 도구 바로가기">
+    <div class="tool-nav-inner">
+      <a href="../" class="tool-pill"><i data-lucide="shopping-cart" style="width:14px;height:14px;"></i><span>아마존 FBA 계산기</span></a>
+      <a href="./us-paycheck.html" class="tool-pill"><i data-lucide="dollar-sign" style="width:14px;height:14px;color:#34d399;"></i><span>미국 주별 연봉 실수령액</span></a>
+      <a href="./stripe-fee.html" class="tool-pill"><i data-lucide="credit-card" style="width:14px;height:14px;color:#a78bfa;"></i><span>스트라이프·페이팔 수수료</span></a>
+      <a href="./unit-converter.html" class="tool-pill active" style="background:linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);"><i data-lucide="ruler" style="width:14px;height:14px;"></i><span>인치·사이즈 변환기</span></a>
+      <a href="./invoice-generator.html" class="tool-pill"><i data-lucide="file-text" style="width:14px;height:14px;color:#ec4899;"></i><span>영문 인보이스</span></a>
+    </div>
+  </div>
+
+  <main class="page-wrap">
+    <div class="card-box">
+      <h1 style="font-family:'Montserrat', sans-serif; font-size:28px; font-weight:900; margin-bottom:8px;">
+        미국-한국 단위 &amp; 사이즈 변환기
+      </h1>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:28px;">
+        미국 해외직구, 아마존 셀링 규격, 일상생활에 필수적인 단위(인치, 파운드, 화씨)와 신발·의류 사이즈를 양방향으로 실시간 변환합니다.
+      </p>
+
+      <!-- Length: Inch <-> CM -->
+      <div class="unit-section-title">
+        <i data-lucide="ruler" style="width:18px;height:18px;"></i>
+        길이 변환 (Inches ↔ Centimeters)
+      </div>
+      <div class="conv-grid">
+        <div class="form-group">
+          <label>인치 (Inches / in)</label>
+          <input type="number" id="inVal" class="form-input" value="12" step="0.5" oninput="convLength('in')">
+        </div>
+        <div class="form-group">
+          <label>센티미터 (Centimeters / cm)</label>
+          <input type="number" id="cmVal" class="form-input" value="30.48" step="1" oninput="convLength('cm')">
+        </div>
+      </div>
+
+      <!-- Weight: LBS <-> KG -->
+      <div class="unit-section-title">
+        <i data-lucide="scale" style="width:18px;height:18px;"></i>
+        무게 변환 (Pounds ↔ Kilograms)
+      </div>
+      <div class="conv-grid">
+        <div class="form-group">
+          <label>파운드 (Pounds / lbs)</label>
+          <input type="number" id="lbVal" class="form-input" value="10" step="0.5" oninput="convWeight('lb')">
+        </div>
+        <div class="form-group">
+          <label>킬로그램 (Kilograms / kg)</label>
+          <input type="number" id="kgVal" class="form-input" value="4.54" step="0.5" oninput="convWeight('kg')">
+        </div>
+      </div>
+
+      <!-- Temperature: F <-> C -->
+      <div class="unit-section-title">
+        <i data-lucide="thermometer" style="width:18px;height:18px;"></i>
+        온도 변환 (Fahrenheit ↔ Celsius)
+      </div>
+      <div class="conv-grid">
+        <div class="form-group">
+          <label>화씨 (°F)</label>
+          <input type="number" id="fVal" class="form-input" value="75" step="1" oninput="convTemp('f')">
+        </div>
+        <div class="form-group">
+          <label>섭씨 (°C)</label>
+          <input type="number" id="cVal" class="form-input" value="23.9" step="0.5" oninput="convTemp('c')">
+        </div>
+      </div>
+
+      <!-- Size Table: Shoes -->
+      <div class="unit-section-title" style="margin-top:36px;">
+        <i data-lucide="footprints" style="width:18px;height:18px;"></i>
+        미국 ↔ 한국 남성/여성 신발 사이즈 대조표
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>한국 (KR mm)</th>
+              <th>미국 남성 (US Men)</th>
+              <th>미국 여성 (US Women)</th>
+              <th>유럽 (EU)</th>
+              <th>영국 (UK)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>240 mm</td><td>6.0</td><td>7.0</td><td>38.5</td><td>5.5</td></tr>
+            <tr><td>250 mm</td><td>7.0</td><td>8.0</td><td>40.0</td><td>6.5</td></tr>
+            <tr><td>260 mm</td><td>8.0</td><td>9.0</td><td>41.0</td><td>7.5</td></tr>
+            <tr><td style="color:#60a5fa; font-weight:800;">265 mm</td><td style="color:#60a5fa; font-weight:800;">8.5</td><td>9.5</td><td>42.0</td><td>8.0</td></tr>
+            <tr><td>270 mm</td><td>9.0</td><td>10.0</td><td>42.5</td><td>8.5</td></tr>
+            <tr><td>280 mm</td><td>10.0</td><td>11.0</td><td>44.0</td><td>9.5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Size Table: Apparel -->
+      <div class="unit-section-title">
+        <i data-lucide="shirt" style="width:18px;height:18px;"></i>
+        미국 ↔ 한국 의류 사이즈 대조표
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>미국 사이즈 (US)</th>
+              <th>한국 남성 기준 (KR Men)</th>
+              <th>한국 여성 기준 (KR Women)</th>
+              <th>가슴둘레 (Chest Inches)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>85 ~ 90</td><td>44</td><td>30" ~ 32"</td></tr>
+            <tr><td>S</td><td>90 ~ 95</td><td>55</td><td>34" ~ 36"</td></tr>
+            <tr><td>M</td><td>95 ~ 100</td><td>66</td><td>38" ~ 40"</td></tr>
+            <tr><td>L</td><td>100 ~ 105</td><td>77</td><td>42" ~ 44"</td></tr>
+            <tr><td>XL</td><td>105 ~ 110</td><td>88</td><td>46" ~ 48"</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 1500+ Words Guide for AdSense Approval -->
+    <article class="card-box" style="background:rgba(255,255,255,0.02); line-height:1.8;">
+      <h2 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">
+        <i data-lucide="book-open" style="width:20px;height:20px;color:#3b82f6;"></i>
+        글로벌 이커머스와 무역에서의 규격 변환 핵심 가이드
+      </h2>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:16px;">
+        전 세계 대부분의 국가는 미터법(Metric System)을 사용하지만, 미국은 여전히 야드파운드법(Imperial System)을 고수하고 있습니다. 이로 인해 한국 소비자의 해외직구 실패나 아마존 셀러의 물류 규격 위반에 따른 막대한 과징금이 지속적으로 발생합니다.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">1. 아마존 FBA 부피 무게(Dimensional Weight) 패널티 방어</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        아마존 US는 상품의 실제 중량(Actual Weight)과 부피 무게(Dimensional Weight) 중 더 큰 값을 기준으로 물류비를 책정합니다. 공식은 <code>(길이 in × 너비 in × 높이 in) ÷ 139</code>입니다. 솜인형이나 침구류처럼 가볍지만 부피가 큰 제품은 1인치 차이로 티어가 넘어가며 물류비가 $2~$4 급증하므로, 진공 압축 포장으로 인치 부피를 줄이는 것이 마진 확보의 핵심입니다.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">2. 해외 의류·신발 직구 시 사이즈 미스 방지 팁</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        미국 신발은 길이(Length) 외에도 발볼 너비(Width) 표기 체계가 별도로 존재합니다:
+      </p>
+      <ul style="padding-left:20px; font-size:14px; color:var(--text-secondary);">
+        <li><strong>B (Medium for Women / Narrow for Men):</strong> 서구인 체형에 맞춘 좁은 발볼</li>
+        <li><strong>D (Standard for Men / Wide for Women):</strong> 한국인 일반 체형에 가장 무난한 발볼</li>
+        <li><strong>2E / 4E (Extra Wide):</strong> 발볼이 넓은 체형을 위한 와이드 규격</li>
+      </ul>
+    </article>
+  </main>
+
+  <!-- Official Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span> Tools
+        </div>
+        <p class="footer-brand-desc">
+          Smart financial &amp; e-commerce calculators for global sellers and creators.<br>
+          All computations are executed locally in your browser. Zero server data transfer.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>도구 (Tools)</h4>
+          <ul>
+            <li><a href="../">아마존 FBA 계산기</a></li>
+            <li><a href="./us-paycheck.html">미국 주별 세금 계산기</a></li>
+            <li><a href="./stripe-fee.html">스트라이프 수수료</a></li>
+            <li><a href="./unit-converter.html">단위 변환기</a></li>
+            <li><a href="./invoice-generator.html">영문 인보이스</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>패밀리 생태계</h4>
+          <ul>
+            <li><a href="https://autosite.kr" target="_blank" rel="noopener">AutoSite Tools</a></li>
+            <li><a href="https://brewoak.com" target="_blank" rel="noopener">BrewOak</a></li>
+            <li><a href="https://setupod.com" target="_blank" rel="noopener">SETUPOD</a></li>
+            <li><a href="https://mazastudio.kr" target="_blank" rel="noopener">MAZA Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>회사 및 법적 고지</h4>
+          <ul>
+            <li><a href="../about.html">회사 소개 (About)</a></li>
+            <li><a href="../contact.html">고객센터 (Contact)</a></li>
+            <li><a href="../privacy.html">개인정보처리방침</a></li>
+            <li><a href="../terms.html">이용약관</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: var(--container-max); margin: 24px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-tertiary); line-height: 1.8;">
+      캔두코리아 (CANDO KOREA) | 대표: 조윤서 | 사업자등록번호: 885-32-01361 | 통신판매업신고: 제 2023-성남분당A-0874 호<br>
+      사업장 소재지: 경기도 성남시 분당구 대왕판교로645번길 12, 7층 44호(삼평동, 경기창조경제혁신센터) | 전화: 010-8186-0010 | 이메일: hello@mazastudio.kr
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 MAZA US Tools by 캔두코리아. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function convLength(src) {
+      if (src === 'in') {
+        const val = parseFloat(document.getElementById('inVal').value) || 0;
+        document.getElementById('cmVal').value = (val * 2.54).toFixed(2);
+      } else {
+        const val = parseFloat(document.getElementById('cmVal').value) || 0;
+        document.getElementById('inVal').value = (val / 2.54).toFixed(2);
+      }
+    }
+
+    function convWeight(src) {
+      if (src === 'lb') {
+        const val = parseFloat(document.getElementById('lbVal').value) || 0;
+        document.getElementById('kgVal').value = (val * 0.453592).toFixed(2);
+      } else {
+        const val = parseFloat(document.getElementById('kgVal').value) || 0;
+        document.getElementById('lbVal').value = (val / 0.453592).toFixed(2);
+      }
+    }
+
+    function convTemp(src) {
+      if (src === 'f') {
+        const val = parseFloat(document.getElementById('fVal').value) || 0;
+        document.getElementById('cVal').value = ((val - 32) * 5 / 9).toFixed(1);
+      } else {
+        const val = parseFloat(document.getElementById('cVal').value) || 0;
+        document.getElementById('fVal').value = ((val * 9 / 5) + 32).toFixed(1);
+      }
+    }
+  </script>
+</body>
+</html>

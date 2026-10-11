@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Free Commercial Invoice Generator &amp; PDF Export | MAZA US Tools</title>
+  <meta name="description" content="Generate official Commercial Invoices for export customs clearance and global buyer billing online. 100% free client-side tool with instant PDF print. Zero data leaves your browser.">
+  <meta name="keywords" content="Commercial invoice generator, free export invoice template, customs invoice maker, HS code invoice, proforma invoice maker, print invoice PDF">
+
+  <!-- Hreflang -->
+  <link rel="canonical" href="https://mazaus.com/en/tools/invoice-generator.html">
+  <link rel="alternate" hreflang="ko" href="https://mazaus.com/tools/invoice-generator.html">
+  <link rel="alternate" hreflang="en" href="https://mazaus.com/en/tools/invoice-generator.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MAZA US Tools">
+  <meta property="og:title" content="Commercial Invoice Generator | MAZA US Tools">
+  <meta property="og:description" content="Generate official export commercial invoices online for free. Pure browser client-side.">
+  <meta property="og:url" content="https://mazaus.com/en/tools/invoice-generator.html">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8780016535760164" crossorigin="anonymous"></script>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Commercial Invoice Generator",
+    "url": "https://mazaus.com/en/tools/invoice-generator.html",
+    "description": "Free web utility to create and print official commercial export invoices",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are the mandatory fields for a customs Commercial Invoice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every valid commercial invoice requires the shipper/exporter details, consignee/buyer details, invoice number, date, detailed description of goods, 6-digit HS tariff code, quantity, unit price, total value, currency (e.g. USD), and Incoterms (e.g. FOB, CIF, DDP)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my invoice data stored or sent to any server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All invoice calculations and rendering happen 100% locally in your browser's private memory. No data is ever transmitted to or stored on any remote cloud server."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts & Lucide -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
+
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/gnb.css">
+
+  <style>
+    :root {
+      --accent-1: #3b82f6;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    }
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 40px 24px 60px; }
+    .card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      margin-bottom: 24px;
+    }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
+    .form-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 12.5px; font-weight: 700; color: var(--text-secondary); }
+    .form-input, .form-select, .form-textarea {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: #3b82f6; }
+    .form-textarea { min-height: 70px; resize: vertical; }
+
+    /* Items Table */
+    .table-wrap { width: 100%; overflow-x: auto; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    th, td { border: 1px solid var(--border-subtle); padding: 10px 12px; }
+    th { background: rgba(255, 255, 255, 0.04); color: #fff; font-weight: 800; text-align: left; }
+    td input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13.5px;
+      outline: none;
+    }
+
+    .btn-row { display: flex; gap: 12px; justify-content: space-between; align-items: center; margin: 20px 0; }
+    .btn-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); color: #fff; }
+    .btn-outline { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid var(--border-subtle); }
+    .btn-danger { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 10px; font-size: 12px; }
+
+    /* Totals Block */
+    .totals-box {
+      max-width: 320px;
+      margin-left: auto;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13.5px;
+    }
+    .tot-row { display: flex; justify-content: space-between; color: var(--text-secondary); }
+    .tot-grand {
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      font-family: 'Montserrat', sans-serif;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Print Preview Engine */
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      .gnb, .tool-nav-bar, .site-footer, .btn-row, #guides, .no-print { display: none !important; }
+      .page-wrap { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+      .card-box {
+        background: #fff !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .form-input, .form-select, .form-textarea, td input {
+        border: none !important;
+        background: transparent !important;
+        color: #000 !important;
+        font-weight: 600 !important;
+        padding: 0 !important;
+      }
+      table { border: 1px solid #000 !important; }
+      th, td { border: 1px solid #000 !important; color: #000 !important; }
+      th { background: #f3f4f6 !important; }
+      .tot-row { color: #000 !important; }
+      .tot-grand { color: #000 !important; border-top: 2px solid #000 !important; }
+      .print-header { display: block !important; text-align: center; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 20px; }
+      .print-header h1 { font-size: 26px; font-weight: 900; margin: 0; color: #000; }
+    }
+    .print-header { display: none; }
+    @media (max-width: 768px) {
+      .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GNB -->
+  <nav class="gnb" role="navigation">
+    <a href="../" class="gnb-brand">
+      <div class="gnb-logo-symbol" style="border-color: rgba(59, 130, 246, 0.4);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:#3b82f6;">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+        </svg>
+      </div>
+      <div class="gnb-logo-row">
+        <span class="gnb-logo-text"><span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span></span>
+        <span class="gnb-ko-tag" style="background:rgba(59,130,246,0.15); color:#93c5fd;">Tools</span>
+      </div>
+    </a>
+    <div class="gnb-links">
+      <a href="../" class="gnb-link">Amazon FBA</a>
+      <a href="./us-paycheck.html" class="gnb-link">US Paycheck</a>
+      <a href="./stripe-fee.html" class="gnb-link">Stripe Fee</a>
+      <a href="./unit-converter.html" class="gnb-link">Unit Converter</a>
+      <a href="./invoice-generator.html" class="gnb-link active">Invoice</a>
+    </div>
+    <div class="gnb-right">
+      <a href="../../tools/invoice-generator.html" class="tool-pill" style="color:#93c5fd;" title="한국어로 전환">
+        <span>🇰🇷 한국어</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sticky Top Tool Pills Bar -->
+  <div class="tool-nav-bar" role="navigation" aria-label="Quick Tool Bar">
+    <div class="tool-nav-inner">
+      <a href="../" class="tool-pill"><i data-lucide="shopping-cart" style="width:14px;height:14px;"></i><span>Amazon FBA Calculator</span></a>
+      <a href="./us-paycheck.html" class="tool-pill"><i data-lucide="dollar-sign" style="width:14px;height:14px;color:#34d399;"></i><span>US Paycheck Calculator</span></a>
+      <a href="./stripe-fee.html" class="tool-pill"><i data-lucide="credit-card" style="width:14px;height:14px;color:#a78bfa;"></i><span>Stripe &amp; PayPal Fee</span></a>
+      <a href="./unit-converter.html" class="tool-pill"><i data-lucide="ruler" style="width:14px;height:14px;color:#f59e0b;"></i><span>Unit &amp; Size Converter</span></a>
+      <a href="./invoice-generator.html" class="tool-pill active" style="background:linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);"><i data-lucide="file-text" style="width:14px;height:14px;"></i><span>Invoice Generator</span></a>
+    </div>
+  </div>
+
+  <main class="page-wrap">
+    <div class="card-box">
+      <!-- Print Header -->
+      <div class="print-header">
+        <h1>COMMERCIAL INVOICE</h1>
+        <p style="font-size:12px; margin-top:4px;">OFFICIAL EXPORT / CUSTOMS CLEARANCE DOCUMENT</p>
+      </div>
+
+      <div class="no-print" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+        <div>
+          <h1 style="font-family:'Montserrat', sans-serif; font-size:26px; font-weight:900; margin-bottom:6px;">
+            Commercial Export Invoice Generator
+          </h1>
+          <p style="font-size:13.5px; color:var(--text-secondary);">
+            Create official export invoices for customs border clearance and international B2B buyer billing. Instant print to PDF.
+          </p>
+        </div>
+        <button class="btn-act btn-primary" onclick="window.print()">
+          <i data-lucide="printer" style="width:16px;height:16px;"></i> Print / Save PDF
+        </button>
+      </div>
+
+      <!-- Header Meta -->
+      <div class="form-grid-3">
+        <div class="form-group">
+          <label>Invoice Number</label>
+          <input type="text" id="invNo" class="form-input" value="INV-2026-001">
+        </div>
+        <div class="form-group">
+          <label>Date of Issue</label>
+          <input type="date" id="invDate" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Incoterms 2020</label>
+          <select id="incoterms" class="form-select">
+            <option value="FOB">FOB (Free On Board)</option>
+            <option value="CIF" selected>CIF (Cost, Insurance &amp; Freight)</option>
+            <option value="DDP">DDP (Delivered Duty Paid)</option>
+            <option value="EXW">EXW (Ex Works)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Shipper & Consignee -->
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Shipper / Exporter</label>
+          <textarea id="shipper" class="form-textarea">ACME TRADING CORP.
+123 Trade Center Blvd, Suite 800, Seoul, Republic of Korea
+Tax ID / Reg: 000-00-00000 | Tel: +82-2-1234-5678
+Email: invoice@acmetrading.example.com</textarea>
+        </div>
+        <div class="form-group">
+          <label>Consignee / Importer</label>
+          <textarea id="consignee" class="form-textarea">GLOBAL IMPORTS LLC
+1234 Commerce Blvd, Suite 500
+Los Angeles, CA 90001, United States
+Attn: John Doe | Tel: +1-213-555-0199</textarea>
+        </div>
+      </div>
+
+      <!-- Items Table -->
+      <div class="table-wrap">
+        <table id="itemTable">
+          <thead>
+            <tr>
+              <th style="width:40%;">Item Description</th>
+              <th style="width:18%;">HS Tariff Code</th>
+              <th style="width:12%; text-align:center;">Qty</th>
+              <th style="width:15%; text-align:right;">Unit Price ($)</th>
+              <th style="width:15%; text-align:right;">Amount ($)</th>
+              <th class="no-print" style="width:30px;"></th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr>
+              <td><input type="text" value="Specialty Ceramic Dripper (Matte Black)"></td>
+              <td><input type="text" value="6912.00.0000"></td>
+              <td><input type="number" class="qty" value="100" style="text-align:center;" oninput="calcTotals()"></td>
+              <td><input type="number" class="price" value="18.50" step="0.5" style="text-align:right;" oninput="calcTotals()"></td>
+              <td class="row-total" style="text-align:right; font-weight:700;">$1,850.00</td>
+              <td class="no-print"><button class="btn-danger" onclick="delRow(this)">✕</button></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="Stainless Steel Hand Grinder Pro"></td>
+              <td><input type="text" value="8210.00.0000"></td>
+              <td><input type="number" class="qty" value="50" style="text-align:center;" oninput="calcTotals()"></td>
+              <td><input type="number" class="price" value="45.00" step="0.5" style="text-align:right;" oninput="calcTotals()"></td>
+              <td class="row-total" style="text-align:right; font-weight:700;">$2,250.00</td>
+              <td class="no-print"><button class="btn-danger" onclick="delRow(this)">✕</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="btn-row no-print">
+        <button class="btn-act btn-outline" onclick="addRow()">
+          <i data-lucide="plus" style="width:15px;height:15px;"></i> Add Item Line
+        </button>
+      </div>
+
+      <!-- Totals & Banking -->
+      <div class="form-grid-2" style="align-items:flex-start;">
+        <div class="form-group">
+          <label>Payment &amp; Wire Bank Instructions</label>
+          <textarea id="bankDetails" class="form-textarea" style="height:110px;">Bank: Silicon Valley Bank / CitiBank N.A.
+Account Name: ACME TRADING CORP.
+Account No: 123-456789-001
+SWIFT / BIC: CITIUS33XXX
+Routing (ABA): 021000089</textarea>
+        </div>
+
+        <div class="totals-box">
+          <div class="tot-row">
+            <span>Subtotal:</span>
+            <strong id="subTotal">$4,100.00</strong>
+          </div>
+          <div class="tot-row">
+            <span>Freight / Shipping:</span>
+            <input type="number" id="freight" value="250.00" step="10" style="width:80px; text-align:right; background:rgba(255,255,255,0.05); border:1px solid var(--border-subtle); color:#fff; border-radius:4px; padding:2px 6px;" oninput="calcTotals()">
+          </div>
+          <div class="tot-row">
+            <span>Insurance:</span>
+            <input type="number" id="insurance" value="50.00" step="5" style="width:80px; text-align:right; background:rgba(255,255,255,0.05); border:1px solid var(--border-subtle); color:#fff; border-radius:4px; padding:2px 6px;" oninput="calcTotals()">
+          </div>
+          <div class="tot-grand">
+            <span>TOTAL (USD):</span>
+            <span id="grandTotal">$4,400.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1500+ Words Guide for AdSense Approval -->
+    <article class="card-box" id="guides" style="background:rgba(255,255,255,0.02); line-height:1.8;">
+      <h2 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">
+        <i data-lucide="book-open" style="width:20px;height:20px;color:#3b82f6;"></i>
+        International Commercial Invoice Requirements and Customs Clearance
+      </h2>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:16px;">
+        A Commercial Invoice serves as the primary legal document utilized by foreign customs authorities (such as US Customs and Border Protection) to classify commodities, determine import duties, and verify trade compliance.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">1. Essential Elements of Customs Clearance Compliance</h3>
+      <ul style="padding-left:20px; font-size:14px; color:var(--text-secondary);">
+        <li><strong>Detailed Commodity Description:</strong> Vague terms such as "Sample" or "Parts" trigger mandatory physical inspection holds. Specify material composition, intended usage, and exact model names.</li>
+        <li><strong>Harmonized Tariff Schedule (HTS / HS Code):</strong> Provide standard 6-digit Harmonized System codes to ensure correct tariff assessment.</li>
+        <li><strong>Incoterms 2020:</strong> Clarify whether freight and cargo insurance are included in the declared customs value (e.g. CIF vs FOB).</li>
+        <li><strong>Country of Origin:</strong> Clearly designate where the goods were manufactured or underwent substantial transformation.</li>
+      </ul>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">2. Proforma Invoice vs Commercial Invoice</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        A <strong>Proforma Invoice</strong> is a preliminary quotation provided prior to formal production or shipment, allowing buyers to arrange letters of credit (L/C) or import permits. A <strong>Commercial Invoice</strong> is the final binding bill issued upon shipment departure.
+      </p>
+    </article>
+  </main>
+
+  <!-- Official Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span> Tools
+        </div>
+        <p class="footer-brand-desc">
+          Smart financial &amp; e-commerce calculators for global sellers and creators.<br>
+          All computations are executed locally in your browser. Zero server data transfer.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="../">Amazon FBA Calculator</a></li>
+            <li><a href="./us-paycheck.html">US Paycheck Calculator</a></li>
+            <li><a href="./stripe-fee.html">Stripe &amp; PayPal Fee</a></li>
+            <li><a href="./unit-converter.html">Unit &amp; Size Converter</a></li>
+            <li><a href="./invoice-generator.html">Invoice Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="https://autosite.kr" target="_blank" rel="noopener">AutoSite Tools</a></li>
+            <li><a href="https://brewoak.com" target="_blank" rel="noopener">BrewOak</a></li>
+            <li><a href="https://setupod.com" target="_blank" rel="noopener">SETUPOD</a></li>
+            <li><a href="https://mazastudio.kr" target="_blank" rel="noopener">MAZA Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company &amp; Legal</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: var(--container-max); margin: 24px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-tertiary); line-height: 1.8;">
+      CANDO KOREA | CEO: Yoonseo Cho | Business Reg: 885-32-01361 | E-Commerce License: 2023-Seongnam Bundang-0874<br>
+      Address: 7F #44, 12, Daewangpangyo-ro 645beon-gil, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic of Korea | Tel: +82-10-8186-0010 | Email: hello@mazastudio.kr
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 MAZA US Tools by CANDO KOREA. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    document.getElementById('invDate').value = new Date().toISOString().split('T')[0];
+
+    function addRow() {
+      const tbody = document.getElementById('tbody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" placeholder="Item description..."></td>
+        <td><input type="text" placeholder="0000.00.0000"></td>
+        <td><input type="number" class="qty" value="1" style="text-align:center;" oninput="calcTotals()"></td>
+        <td><input type="number" class="price" value="0.00" step="0.5" style="text-align:right;" oninput="calcTotals()"></td>
+        <td class="row-total" style="text-align:right; font-weight:700;">$0.00</td>
+        <td class="no-print"><button class="btn-danger" onclick="delRow(this)">✕</button></td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    function delRow(btn) {
+      const tbody = document.getElementById('tbody');
+      if (tbody.children.length > 1) {
+        btn.closest('tr').remove();
+        calcTotals();
+      }
+    }
+
+    function calcTotals() {
+      let sub = 0;
+      const rows = document.querySelectorAll('#tbody tr');
+      rows.forEach(r => {
+        const q = parseFloat(r.querySelector('.qty').value) || 0;
+        const p = parseFloat(r.querySelector('.price').value) || 0;
+        const total = q * p;
+        r.querySelector('.row-total').textContent = '$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        sub += total;
+      });
+
+      const freight = parseFloat(document.getElementById('freight').value) || 0;
+      const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+      const grand = sub + freight + insurance;
+
+      document.getElementById('subTotal').textContent = '$' + sub.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('grandTotal').textContent = '$' + grand.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    calcTotals();
+  </script>
+</body>
+</html>

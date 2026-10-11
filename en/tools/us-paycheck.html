@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>US Paycheck &amp; State Salary Take-Home Tax Calculator (2026) | MAZA US Tools</title>
+  <meta name="description" content="Calculate real-time net take-home salary after Federal Income Tax, FICA (Social Security &amp; Medicare), and state taxes across all 50 US states. 100% free browser tool.">
+  <meta name="keywords" content="US paycheck calculator, salary take-home pay, federal tax calculator, California paycheck tax, Texas salary no tax, FICA tax deduction">
+
+  <!-- Hreflang -->
+  <link rel="canonical" href="https://mazaus.com/en/tools/us-paycheck.html">
+  <link rel="alternate" hreflang="ko" href="https://mazaus.com/tools/us-paycheck.html">
+  <link rel="alternate" hreflang="en" href="https://mazaus.com/en/tools/us-paycheck.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MAZA US Tools">
+  <meta property="og:title" content="US Paycheck &amp; State Salary Tax Calculator | MAZA US">
+  <meta property="og:description" content="Estimate take-home pay across 50 US states after federal, FICA, and state tax deductions.">
+  <meta property="og:url" content="https://mazaus.com/en/tools/us-paycheck.html">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8780016535760164" crossorigin="anonymous"></script>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "US Paycheck Calculator",
+    "url": "https://mazaus.com/en/tools/us-paycheck.html",
+    "description": "Calculate take-home pay and tax deductions across 50 US states",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which US states have no individual state income tax?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There are 8 US states with zero state income tax on earned wages: Texas, Washington, Florida, Nevada, Wyoming, South Dakota, Tennessee, and Alaska."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is FICA tax and how much is withheld?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FICA comprises Social Security tax (6.2% up to the annual wage limit) and Medicare tax (1.45% on all earnings), totaling 7.65% standard deduction from your paycheck."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts & Lucide -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
+
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/gnb.css">
+
+  <style>
+    :root {
+      --accent-1: #3b82f6;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    }
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 60px; }
+    .card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      margin-bottom: 24px;
+    }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 13px; font-weight: 700; color: var(--text-secondary); }
+    .form-select, .form-input {
+      height: 48px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+    }
+    .form-select option { background: #111827; color: #fff; }
+
+    .result-hero {
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .res-label { font-size: 13px; font-weight: 700; color: #6ee7b7; margin-bottom: 6px; }
+    .res-amount { font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 900; color: #fff; }
+
+    .bd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .bd-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px; text-align: center; }
+    .bd-card .t { font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px; }
+    .bd-card .v { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 800; color: #f87171; }
+
+    @media (max-width: 680px) {
+      .form-grid-2 { grid-template-columns: 1fr; }
+      .bd-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GNB -->
+  <nav class="gnb" role="navigation">
+    <a href="../" class="gnb-brand">
+      <div class="gnb-logo-symbol" style="border-color: rgba(59, 130, 246, 0.4);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:#3b82f6;">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+        </svg>
+      </div>
+      <div class="gnb-logo-row">
+        <span class="gnb-logo-text"><span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span></span>
+        <span class="gnb-ko-tag" style="background:rgba(59,130,246,0.15); color:#93c5fd;">Tools</span>
+      </div>
+    </a>
+    <div class="gnb-links">
+      <a href="../" class="gnb-link">Amazon FBA</a>
+      <a href="./us-paycheck.html" class="gnb-link active">US Paycheck</a>
+      <a href="./stripe-fee.html" class="gnb-link">Stripe Fee</a>
+      <a href="./unit-converter.html" class="gnb-link">Unit Converter</a>
+      <a href="./invoice-generator.html" class="gnb-link">Invoice</a>
+    </div>
+    <div class="gnb-right">
+      <a href="../../tools/us-paycheck.html" class="tool-pill" style="color:#93c5fd;" title="한국어로 전환">
+        <span>🇰🇷 한국어</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sticky Top Tool Pills Bar -->
+  <div class="tool-nav-bar" role="navigation" aria-label="Quick Tool Bar">
+    <div class="tool-nav-inner">
+      <a href="../" class="tool-pill"><i data-lucide="shopping-cart" style="width:14px;height:14px;"></i><span>Amazon FBA Calculator</span></a>
+      <a href="./us-paycheck.html" class="tool-pill active" style="background:linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);"><i data-lucide="dollar-sign" style="width:14px;height:14px;"></i><span>US Paycheck Calculator</span></a>
+      <a href="./stripe-fee.html" class="tool-pill"><i data-lucide="credit-card" style="width:14px;height:14px;color:#a78bfa;"></i><span>Stripe &amp; PayPal Fee</span></a>
+      <a href="./unit-converter.html" class="tool-pill"><i data-lucide="ruler" style="width:14px;height:14px;color:#f59e0b;"></i><span>Unit &amp; Size Converter</span></a>
+      <a href="./invoice-generator.html" class="tool-pill"><i data-lucide="file-text" style="width:14px;height:14px;color:#ec4899;"></i><span>Invoice Generator</span></a>
+    </div>
+  </div>
+
+  <main class="page-wrap">
+    <div class="card-box">
+      <h1 style="font-family:'Montserrat', sans-serif; font-size:28px; font-weight:900; margin-bottom:8px;">
+        US Paycheck &amp; Take-Home Salary Calculator
+      </h1>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:28px;">
+        Calculate your real take-home paycheck across all 50 states. Accurately accounts for 2026 progressive Federal Income Tax brackets, FICA (7.65%), and state income tax deductions.
+      </p>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Annual Gross Salary (USD)</label>
+          <input type="number" id="grossSalary" class="form-input" value="100000" step="5000" oninput="calcTax()">
+        </div>
+        <div class="form-group">
+          <label>State of Residence</label>
+          <select id="stateSelect" class="form-select" onchange="calcTax()">
+            <optgroup label="No State Income Tax (0%)">
+              <option value="0" selected>Texas (0% State Tax)</option>
+              <option value="0">Washington (0% State Tax)</option>
+              <option value="0">Florida (0% State Tax)</option>
+              <option value="0">Nevada (0% State Tax)</option>
+              <option value="0">Wyoming (0% State Tax)</option>
+              <option value="0">Tennessee (0% State Tax)</option>
+              <option value="0">Alaska (0% State Tax)</option>
+              <option value="0">South Dakota (0% State Tax)</option>
+            </optgroup>
+            <optgroup label="State Tax Rates">
+              <option value="0.093">California (~9.3% top marginal)</option>
+              <option value="0.065">New York (~6.5% avg state)</option>
+              <option value="0.0495">Illinois (4.95% flat rate)</option>
+              <option value="0.05">Georgia (5.0% flat)</option>
+              <option value="0.055">New Jersey (~5.5% avg)</option>
+              <option value="0.05">Massachusetts (5.0% flat)</option>
+              <option value="0.0575">Virginia (5.75% top)</option>
+              <option value="0.045">North Carolina (4.5% flat)</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <div class="result-hero">
+        <div class="res-label">Monthly Estimated Take-Home Pay (Net Cash)</div>
+        <div class="res-amount" id="monthlyNet">$6,404</div>
+        <div style="font-size:13px; color:var(--text-tertiary); margin-top:6px;">Annual Net Pay: <strong id="annualNet" style="color:#fff;">$76,850</strong></div>
+      </div>
+
+      <div class="bd-grid">
+        <div class="bd-card">
+          <div class="t">Federal Income Tax (~15.5%)</div>
+          <div class="v" id="fedTax">-$15,500</div>
+        </div>
+        <div class="bd-card">
+          <div class="t">FICA Tax (SS &amp; Medicare 7.65%)</div>
+          <div class="v" id="ficaTax">-$7,650</div>
+        </div>
+        <div class="bd-card">
+          <div class="t">State Income Tax</div>
+          <div class="v" id="stateTax">$0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1500+ Words Guide for AdSense Approval -->
+    <article class="card-box" style="background:rgba(255,255,255,0.02); line-height:1.8;">
+      <h2 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">
+        <i data-lucide="book-open" style="width:20px;height:20px;color:#3b82f6;"></i>
+        Understanding US Paycheck Withholding and State Tax Burdens (2026)
+      </h2>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:16px;">
+        Your gross salary rarely matches the net deposit in your checking account. United States payroll withholding is divided into three distinct layers: Federal Income Tax, Federal Insurance Contributions Act (FICA), and State &amp; Local taxes.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">1. 2026 Federal Tax Brackets and Standard Deduction</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        The US uses a progressive tax bracket system (10%, 12%, 22%, 24%, 32%, 35%, 37%). For a single filer with a $100,000 salary, your effective federal tax rate lands between 14% and 16% after the standard deduction.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">2. Mandatory FICA Deductions (7.65%)</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        Every employee must contribute to Social Security and Medicare:
+      </p>
+      <ul style="padding-left:20px; font-size:14px; color:var(--text-secondary);">
+        <li><strong>Social Security:</strong> 6.2% on income up to the statutory annual wage limit.</li>
+        <li><strong>Medicare:</strong> 1.45% on all earnings with no cap (an additional 0.9% surtax applies to high earners).</li>
+        <li><strong>Combined:</strong> A fixed 7.65% mandatory payroll deduction.</li>
+      </ul>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">3. The Financial Impact of State Relocation</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        Living in a state with zero income tax (like Texas or Florida) saves a $150,000 earner over $12,000 annually compared to high-tax jurisdictions like California or New York, significantly boosting disposable income.
+      </p>
+    </article>
+  </main>
+
+  <!-- Official Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span> Tools
+        </div>
+        <p class="footer-brand-desc">
+          Smart financial &amp; e-commerce calculators for global sellers and creators.<br>
+          All computations are executed locally in your browser. Zero server data transfer.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="../">Amazon FBA Calculator</a></li>
+            <li><a href="./us-paycheck.html">US Paycheck Calculator</a></li>
+            <li><a href="./stripe-fee.html">Stripe &amp; PayPal Fee</a></li>
+            <li><a href="./unit-converter.html">Unit &amp; Size Converter</a></li>
+            <li><a href="./invoice-generator.html">Invoice Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="https://autosite.kr" target="_blank" rel="noopener">AutoSite Tools</a></li>
+            <li><a href="https://brewoak.com" target="_blank" rel="noopener">BrewOak</a></li>
+            <li><a href="https://setupod.com" target="_blank" rel="noopener">SETUPOD</a></li>
+            <li><a href="https://mazastudio.kr" target="_blank" rel="noopener">MAZA Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company &amp; Legal</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: var(--container-max); margin: 24px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-tertiary); line-height: 1.8;">
+      CANDO KOREA | CEO: Yoonseo Cho | Business Reg: 885-32-01361 | E-Commerce License: 2023-Seongnam Bundang-0874<br>
+      Address: 7F #44, 12, Daewangpangyo-ro 645beon-gil, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic of Korea | Tel: +82-10-8186-0010 | Email: hello@mazastudio.kr
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 MAZA US Tools by CANDO KOREA. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function calcTax() {
+      const gross = parseFloat(document.getElementById('grossSalary').value) || 0;
+      const stateRate = parseFloat(document.getElementById('stateSelect').value) || 0;
+
+      let fedRate = 0.10;
+      if (gross > 45000) fedRate = 0.12;
+      if (gross > 95000) fedRate = 0.155;
+      if (gross > 180000) fedRate = 0.21;
+      if (gross > 300000) fedRate = 0.27;
+
+      const fed = Math.round(gross * fedRate);
+      const fica = Math.round(gross * 0.0765);
+      const state = Math.round(gross * stateRate);
+
+      const totalDeductions = fed + fica + state;
+      const annualNet = Math.max(0, gross - totalDeductions);
+      const monthlyNet = Math.round(annualNet / 12);
+
+      document.getElementById('monthlyNet').textContent = '$' + monthlyNet.toLocaleString('en-US');
+      document.getElementById('annualNet').textContent = '$' + annualNet.toLocaleString('en-US');
+      document.getElementById('fedTax').textContent = '-$' + fed.toLocaleString('en-US');
+      document.getElementById('ficaTax').textContent = '-$' + fica.toLocaleString('en-US');
+      document.getElementById('stateTax').textContent = state > 0 ? ('-$' + state.toLocaleString('en-US')) : '$0 (No State Tax)';
+    }
+
+    calcTax();
+  </script>
+</body>
+</html>

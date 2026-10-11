@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>MAZA US Tools | Amazon FBA Profit &amp; US Paycheck Tax Calculator</title>
+  <meta name="description" content="Free real-time Amazon FBA fee calculator, net profit margins, break-even ROAS, and US state paycheck tax estimations. 100% free client-side browser utility.">
+  <meta name="keywords" content="Amazon FBA calculator, FBA fee calculator, US paycheck calculator, salary tax calculator, Shopify profit calculator, Amazon PPC break-even ROAS">
+
+  <!-- Hreflang (Bilingual) -->
+  <link rel="canonical" href="https://mazaus.com/en/">
+  <link rel="alternate" hreflang="ko" href="https://mazaus.com/">
+  <link rel="alternate" hreflang="en" href="https://mazaus.com/en/">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MAZA US Tools">
+  <meta property="og:title" content="MAZA US Tools | Amazon FBA &amp; US Tax Calculator">
+  <meta property="og:description" content="Calculate real-time Amazon FBA referral & fulfillment fees, net profit, and break-even ROAS.">
+  <meta property="og:url" content="https://mazaus.com/en/">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8780016535760164" crossorigin="anonymous"></script>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "MAZA US Tools Amazon FBA Calculator",
+    "url": "https://mazaus.com/en/",
+    "description": "Real-time Amazon FBA fulfillment fee and net margin calculator for US e-commerce sellers",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/gnb.css">
+
+  <style>
+    :root {
+      --accent-1: #3b82f6;
+      --accent-2: #60a5fa;
+      --accent-3: #93c5fd;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    }
+
+    .calc-hero-wrap {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .top-header { text-align: center; margin-bottom: 32px; }
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .top-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .text-gradient-blue {
+      background: linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .calc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      margin-bottom: 36px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .platform-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .platform-btn {
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-fast);
+    }
+
+    .platform-btn:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .platform-btn.active {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: #3b82f6;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+    }
+
+    .platform-btn .fee-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .input-wrap { position: relative; }
+    .form-input {
+      width: 100%;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0 40px 0 16px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: #3b82f6;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
+    }
+
+    .input-unit {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-tertiary);
+    }
+
+    .chips-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip-btn {
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .chip-btn:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: #3b82f6;
+      color: #fff;
+    }
+
+    /* Result */
+    .result-hero {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.08) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .result-net-profit {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(36px, 6vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .result-net-profit.positive { color: #34d399; }
+    .result-net-profit.negative { color: #f87171; }
+
+    .result-margin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .result-margin-badge.positive {
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      color: #6ee7b7;
+    }
+
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .bd-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .bd-item .title { font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px; }
+    .bd-item .val { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; color: #fff; }
+
+    @media (max-width: 680px) {
+      .platform-selector { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .breakdown-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════ GNB ═══════ -->
+  <nav class="gnb" role="navigation" aria-label="Main Navigation">
+    <a href="./" class="gnb-brand" aria-label="MAZA US Tools Home">
+      <div class="gnb-logo-symbol" style="border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 0 16px rgba(59, 130, 246, 0.25);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;color:#3b82f6;">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="gnb-logo-text-wrap">
+        <div class="gnb-logo-row">
+          <span class="gnb-logo-text">
+            <span style="color:#fff;">MAZA</span> <span class="text-gradient-blue">US</span>
+          </span>
+          <span class="gnb-ko-tag" style="background:rgba(59, 130, 246, 0.15); border-color:rgba(59, 130, 246, 0.3); color:#93c5fd;">Tools</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="gnb-links">
+      <a href="#calculator" class="gnb-link active">Amazon Calculator</a>
+      <a href="../tools/us-paycheck.html" class="gnb-link">Paycheck Tax</a>
+      <a href="../tools/unit-converter.html" class="gnb-link">Size Converter</a>
+      <a href="#guides" class="gnb-link">FBA Fee Guide</a>
+    </div>
+
+    <div class="gnb-right" style="display:flex; align-items:center; gap:10px;">
+      <!-- Language Switcher (BrewOak Pattern) -->
+      <a href="../" class="tool-pill" style="border-color:rgba(59, 130, 246, 0.4); color:#93c5fd;" title="한국어 버전으로 전환">
+        <span>🇰🇷 한국어</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ═══════ TOP TOOL NAV BAR ═══════ -->
+  <div class="tool-nav-bar" role="navigation" aria-label="Quick Tools Navigation">
+    <div class="tool-nav-inner">
+      <a href="./" class="tool-pill active" style="background:linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);">
+        <i data-lucide="shopping-cart" style="width:14px;height:14px;"></i>
+        <span>Amazon FBA Calculator</span>
+      </a>
+      <a href="../tools/us-paycheck.html" class="tool-pill">
+        <i data-lucide="dollar-sign" style="width:14px;height:14px;color:#34d399;"></i>
+        <span>US Paycheck Tax</span>
+      </a>
+      <a href="../tools/stripe-fee.html" class="tool-pill">
+        <i data-lucide="credit-card" style="width:14px;height:14px;color:#a78bfa;"></i>
+        <span>Stripe &amp; PayPal Fee</span>
+      </a>
+      <a href="../tools/unit-converter.html" class="tool-pill">
+        <i data-lucide="ruler" style="width:14px;height:14px;color:#f59e0b;"></i>
+        <span>Unit &amp; Size Converter</span>
+      </a>
+      <a href="../tools/invoice-generator.html" class="tool-pill">
+        <i data-lucide="file-text" style="width:14px;height:14px;color:#ec4899;"></i>
+        <span>Invoice Generator</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══════ MAIN CALCULATOR ═══════ -->
+  <main class="calc-hero-wrap" id="calculator">
+    <header class="top-header">
+      <div class="top-badge">
+        <i data-lucide="zap" style="width:13px;height:13px;"></i>
+        100% Free · Real-Time Client Compute · 2026 Amazon Fee Schedule
+      </div>
+      <h1 class="top-title">
+        Amazon FBA <span class="text-gradient-blue">Profit Calculator</span>
+      </h1>
+      <p style="font-size:15px; color:var(--text-tertiary); max-width:640px; margin:0 auto; line-height:1.6;">
+        Input your listing price, manufacturing cost, and FBA fees to compute your<br>
+        net payout, profit margin, and break-even ROAS in seconds.
+      </p>
+    </header>
+
+    <div class="calc-card">
+      <!-- Platform -->
+      <div class="platform-selector">
+        <button class="platform-btn active" data-platform="fba" onclick="setPlatform('fba')">
+          <span>Amazon FBA (Fulfillment)</span>
+          <span class="fee-hint">15% Referral + FBA Shipping</span>
+        </button>
+        <button class="platform-btn" data-platform="fbm" onclick="setPlatform('fbm')">
+          <span>Amazon FBM (Merchant)</span>
+          <span class="fee-hint">15% Referral + Self Ship</span>
+        </button>
+        <button class="platform-btn" data-platform="shopify" onclick="setPlatform('shopify')">
+          <span>Shopify Store</span>
+          <span class="fee-hint">2.9% + $0.30 Processing</span>
+        </button>
+      </div>
+
+      <!-- Inputs -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Selling Price (List Price)</label>
+          <div class="input-wrap">
+            <input type="number" id="sellPrice" class="form-input" value="35.00" step="0.5" oninput="calculate()">
+            <span class="input-unit">$ (USD)</span>
+          </div>
+          <div class="chips-row">
+            <button class="chip-btn" onclick="setVal('sellPrice', 19.99)">$19.99</button>
+            <button class="chip-btn" onclick="setVal('sellPrice', 29.99)">$29.99</button>
+            <button class="chip-btn" onclick="setVal('sellPrice', 49.99)">$49.99</button>
+            <button class="chip-btn" onclick="setVal('sellPrice', 99.00)">$99.00</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Unit Manufacturing / COGS</label>
+          <div class="input-wrap">
+            <input type="number" id="costPrice" class="form-input" value="8.50" step="0.5" oninput="calculate()">
+            <span class="input-unit">$ (USD)</span>
+          </div>
+          <div class="chips-row">
+            <button class="chip-btn" onclick="setVal('costPrice', 5.00)">$5</button>
+            <button class="chip-btn" onclick="setVal('costPrice', 10.00)">$10</button>
+            <button class="chip-btn" onclick="setVal('costPrice', 15.00)">$15</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>FBA Pick &amp; Pack / Shipping Fee</label>
+          <div class="input-wrap">
+            <input type="number" id="shippingFee" class="form-input" value="5.40" step="0.1" oninput="calculate()">
+            <span class="input-unit">$ (USD)</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>PPC Ad Spend per Unit (Optional)</label>
+          <div class="input-wrap">
+            <input type="number" id="adSpend" class="form-input" value="3.50" step="0.5" oninput="calculate()">
+            <span class="input-unit">$ (USD)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Hero -->
+      <div class="result-hero">
+        <div style="font-size:13px; font-weight:700; color:#93c5fd; margin-bottom:6px;">Estimated Net Profit per Unit</div>
+        <div class="result-net-profit positive" id="profitDisplay">+$12.35</div>
+        <div class="result-margin-badge positive" id="marginBadge">
+          <i data-lucide="trending-up" style="width:14px;height:14px;"></i> Margin 35.3% · Break-Even ROAS 220%
+        </div>
+
+        <div class="breakdown-grid">
+          <div class="bd-item">
+            <div class="title">Amazon Referral Fee (15%)</div>
+            <div class="val" id="bdReferral" style="color:#f87171;">-$5.25</div>
+          </div>
+          <div class="bd-item">
+            <div class="title">FBA Fulfillment Fee</div>
+            <div class="val" id="bdFBA" style="color:#f87171;">-$5.40</div>
+          </div>
+          <div class="bd-item">
+            <div class="title">COGS Cost</div>
+            <div class="val" id="bdCost" style="color:#f87171;">-$8.50</div>
+          </div>
+          <div class="bd-item">
+            <div class="title">PPC Ad Cost</div>
+            <div class="val" id="bdAd" style="color:#f87171;">-$3.50</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Helpful Content for Google AdSense Approval -->
+    <article class="card-box" id="guides" style="background:rgba(255,255,255,0.02); line-height:1.8;">
+      <h2 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">
+        <i data-lucide="book-open" style="width:20px;height:20px;color:#3b82f6;"></i>
+        2026 Amazon FBA Fee Guide &amp; Margin Defense
+      </h2>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:16px;">
+        While Amazon US remains the largest e-commerce marketplace globally, nuanced and tiered fee models often mask hidden deficits. Mastering fulfillment tiers and advertising economics is essential to scaling sustainable gross margins.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">1. Understanding Referral Fees</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        Amazon charges a percentage on every unit sold, typically <strong>15% for major consumer categories</strong> (Beauty, Home, Kitchen, Electronics). Certain niches like apparel feature sliding scales from 8% to 17% depending on the total sale price threshold.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">2. FBA Fulfillment Tiers (Dimensional Weight)</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        FBA fees depend on package dimensions and unit shipping weight. Even a fractional inch difference can push your package from Standard to Large Oversize, adding $2.00 to $4.00 per unit in fulfillment surcharges. Always optimize product packaging before shipping container volume to Amazon fulfillment centers.
+      </p>
+
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">3. Break-Even ROAS Calculation Formula</h3>
+      <p style="font-size:14px; color:var(--text-secondary);">
+        Your break-even ACoS (Advertising Cost of Sales) equals your gross margin before advertising. If your net margin before PPC is 35%, spending above 35% on PPC results in negative cashflow. Convert this to ROAS using <code>100 / Margin%</code> to evaluate PPC campaigns in real time.
+      </p>
+    </article>
+  </main>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <span style="color:#fff;">MAZA</span> <span class="text-gradient-blue">US</span> Tools
+        </div>
+        <p class="footer-brand-desc">
+          Smart financial &amp; e-commerce calculators for global sellers and creators.<br>
+          All computations are executed locally in your browser. Zero server data transfer.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="#calculator">Amazon FBA Calculator</a></li>
+            <li><a href="../tools/us-paycheck.html">US Paycheck Tax</a></li>
+            <li><a href="../tools/stripe-fee.html">Stripe Fee Calculator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="https://autosite.kr" target="_blank" rel="noopener">AutoSite Tools</a></li>
+            <li><a href="https://brewoak.com" target="_blank" rel="noopener">BrewOak</a></li>
+            <li><a href="https://setupod.com" target="_blank" rel="noopener">SETUPOD</a></li>
+            <li><a href="https://mazastudio.kr" target="_blank" rel="noopener">MAZA Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company &amp; Legal</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact Support</a></li>
+            <li><a href="../privacy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Official CANDO KOREA Business Footer Strip -->
+    <div style="max-width: var(--container-max); margin: 24px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-tertiary); line-height: 1.8;">
+      CANDO KOREA | CEO: Yoonseo Cho | Business Reg: 885-32-01361 | E-Commerce License: 2023-Seongnam Bundang-0874<br>
+      Address: 7F #44, 12, Daewangpangyo-ro 645beon-gil, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic of Korea | Tel: +82-10-8186-0010 | Email: hello@mazastudio.kr
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 MAZA US Tools by CANDO KOREA. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="./about.html">About</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════ LOGIC SCRIPT ═══════ -->
+  <script>
+    lucide.createIcons();
+
+    let curPlatform = 'fba';
+
+    function setPlatform(p) {
+      curPlatform = p;
+      document.querySelectorAll('.platform-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.platform === p);
+      });
+      calculate();
+    }
+
+    function setVal(id, val) {
+      document.getElementById(id).value = val;
+      calculate();
+    }
+
+    function calculate() {
+      const sell = parseFloat(document.getElementById('sellPrice').value) || 0;
+      const cost = parseFloat(document.getElementById('costPrice').value) || 0;
+      const ship = parseFloat(document.getElementById('shippingFee').value) || 0;
+      const ad = parseFloat(document.getElementById('adSpend').value) || 0;
+
+      let referral = 0;
+      if (curPlatform === 'fba' || curPlatform === 'fbm') {
+        referral = sell * 0.15;
+      } else {
+        referral = (sell * 0.029) + 0.30;
+      }
+
+      const totalDeductions = cost + ship + referral + ad;
+      const netProfit = sell - totalDeductions;
+      const marginRate = sell > 0 ? (netProfit / sell * 100) : 0;
+
+      let bepRoas = '—';
+      const costWithoutAd = cost + ship + referral;
+      if (costWithoutAd < sell) {
+        const bepBudget = sell - costWithoutAd;
+        bepRoas = (sell / bepBudget * 100).toFixed(0) + '%';
+      } else {
+        bepRoas = 'Deficit';
+      }
+
+      const isPos = netProfit >= 0;
+      const pEl = document.getElementById('profitDisplay');
+      pEl.textContent = (isPos ? '+$' : '-$') + Math.abs(netProfit).toFixed(2);
+      pEl.className = 'result-net-profit ' + (isPos ? 'positive' : 'negative');
+
+      const bEl = document.getElementById('marginBadge');
+      bEl.innerHTML = `<i data-lucide="${isPos ? 'trending-up' : 'trending-down'}" style="width:14px;height:14px;"></i> Margin ${marginRate.toFixed(1)}% · Break-Even ROAS ${bepRoas}`;
+      bEl.className = 'result-margin-badge ' + (isPos ? 'positive' : 'negative');
+
+      document.getElementById('bdReferral').textContent = '-$' + referral.toFixed(2);
+      document.getElementById('bdFBA').textContent = '-$' + ship.toFixed(2);
+      document.getElementById('bdCost').textContent = '-$' + cost.toFixed(2);
+      document.getElementById('bdAd').textContent = '-$' + ad.toFixed(2);
+
+      lucide.createIcons();
+    }
+
+    calculate();
+  </script>
+</body>
+</html>
