@@ -37,28 +37,49 @@
 </head>
 <body>
 
-  <nav class="gnb" role="navigation">
-    <a href="./" class="gnb-brand">
-      <div class="gnb-logo-symbol" style="border-color: rgba(59, 130, 246, 0.4);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:#3b82f6;">
+  <!-- ═══════ UNIFIED SINGLE GNB ═══════ -->
+  <nav class="gnb" role="navigation" aria-label="Main Navigation">
+    <a href="./" class="gnb-brand" aria-label="MAZA US Tools Home">
+      <div class="gnb-logo-symbol">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
           <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
         </svg>
       </div>
       <div class="gnb-logo-row">
-        <span class="gnb-logo-text"><span style="color:#fff;">MAZA</span> <span style="color:#60a5fa;">US</span></span>
-        <span class="gnb-ko-tag" style="background:rgba(59,130,246,0.15); color:#93c5fd;">Tools</span>
+        <span class="gnb-logo-text"><span style="color:#fff;">MAZA</span> <span class="text-gradient-blue">US</span></span>
+        <span class="gnb-ko-tag">Tools</span>
       </div>
     </a>
+
     <div class="gnb-links">
-      <a href="./" class="gnb-link">Amazon FBA</a>
-      <a href="./tools/us-paycheck.html" class="gnb-link">US Paycheck</a>
-      <a href="./tools/stripe-fee.html" class="gnb-link">Stripe Fee</a>
-      <a href="./tools/unit-converter.html" class="gnb-link">Unit Converter</a>
-      <a href="./tools/invoice-generator.html" class="gnb-link">Invoice</a>
+      <a href="./" class="gnb-link">
+        <i data-lucide="shopping-cart"></i>
+        <span>Amazon FBA</span>
+      </a>
+      <a href="./tools/us-paycheck.html" class="gnb-link">
+        <i data-lucide="dollar-sign"></i>
+        <span>US Paycheck</span>
+      </a>
+      <a href="./tools/stripe-fee.html" class="gnb-link">
+        <i data-lucide="credit-card"></i>
+        <span>Stripe Fee</span>
+      </a>
+      <a href="./tools/unit-converter.html" class="gnb-link">
+        <i data-lucide="ruler"></i>
+        <span>Unit Converter</span>
+      </a>
+      <a href="./tools/invoice-generator.html" class="gnb-link">
+        <i data-lucide="file-text"></i>
+        <span>Invoice</span>
+      </a>
     </div>
+
     <div class="gnb-right">
-      <a href="../terms.html" class="tool-pill" style="color:#93c5fd;"><span>🇰🇷 한국어</span></a>
+      <a href="../terms.html" class="lang-toggle-btn" title="한국어로 전환">
+        <span>🇰🇷 한국어</span>
+      </a>
     </div>
   </nav>
 
