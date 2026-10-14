@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>온라인 결제 수수료 이해하기: 고정 수수료, 해외 카드, 환전, 역산 청구 | MAZA US Tools</title>
+  <meta name="description" content="Stripe와 PayPal의 기본 수수료 구조, 금액이 작을수록 실효 수수료율이 높아지는 이유, 환전 수수료, 받고 싶은 금액에서 청구액을 역산하는 방법을 정리했습니다.">
+  <link rel="canonical" href="https://mazaus.com/guides/payment-processing-fees.html">
+  <link rel="alternate" hreflang="ko" href="https://mazaus.com/guides/payment-processing-fees.html">
+  <link rel="alternate" hreflang="en" href="https://mazaus.com/en/guides/payment-processing-fees.html">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8780016535760164" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/gnb.css">
+
+  <style>
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 60px; }
+    .doc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      line-height: 1.8;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+    }
+    .doc-box h1 { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 20px; }
+    .doc-box h2 { font-size: 18px; font-weight: 800; color: #93c5fd; margin: 28px 0 10px; }
+    .doc-box p { margin-bottom: 12px; }
+    .eco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+    .eco-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+    .eco-card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+    .eco-card h3 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .eco-card p { font-size: 12.5px; color: var(--text-tertiary); margin: 0; }
+
+    .doc-box table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0 16px; }
+    .doc-box th, .doc-box td { border: 1px solid var(--border-subtle); padding: 8px 10px; text-align: left; }
+    .doc-box th { color: #fff; background: rgba(255,255,255,0.04); }
+    .doc-box ul, .doc-box ol { padding-left: 22px; margin: 0 0 12px; }
+    .doc-box li { margin-bottom: 6px; }
+    .doc-box a { color: #93c5fd; text-decoration: underline; }
+    .doc-box .ex-box { background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px; margin: 12px 0 16px; }
+    .doc-box .ex-note { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.35); color: #fde68a; border-radius: 12px; padding: 12px 16px; margin: 20px 0 0; font-size: 13.5px; line-height: 1.7; }
+    .doc-box .lead-meta { font-size: 13px; color: var(--text-tertiary); margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+
+  <!-- ═══════ UNIFIED SINGLE GNB ═══════ -->
+  <nav class="gnb" role="navigation" aria-label="메인 네비게이션">
+    <a href="../" class="gnb-brand" aria-label="MAZA US Tools 홈">
+      <div class="gnb-logo-symbol">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="gnb-logo-row">
+        <span class="gnb-logo-text">
+          <span style="color:#fff;">MAZA</span> <span class="text-gradient-blue">US</span>
+        </span>
+        <span class="gnb-ko-tag">Tools</span>
+      </div>
+    </a>
+
+    <div class="gnb-links">
+      <a href="../" class="gnb-link">
+        <i data-lucide="shopping-cart"></i>
+        <span>아마존 FBA</span>
+      </a>
+      <a href="../tools/us-paycheck.html" class="gnb-link">
+        <i data-lucide="dollar-sign"></i>
+        <span>미국 연봉 계산기</span>
+      </a>
+      <a href="../tools/stripe-fee.html" class="gnb-link">
+        <i data-lucide="credit-card"></i>
+        <span>스트라이프 수수료</span>
+      </a>
+      <a href="../tools/unit-converter.html" class="gnb-link">
+        <i data-lucide="ruler"></i>
+        <span>단위·사이즈 변환</span>
+      </a>
+      <a href="../tools/invoice-generator.html" class="gnb-link">
+        <i data-lucide="file-text"></i>
+        <span>영문 인보이스</span>
+      </a>
+    </div>
+
+    <div class="gnb-right">
+      <a href="../en/guides/payment-processing-fees.html" class="lang-toggle-btn" title="Switch to English">
+        <span>🇺🇸 English</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="page-wrap">
+    <article class="doc-box">
+      <h1>온라인 결제 수수료 이해하기: 고정 수수료, 해외 카드, 환전, 역산 청구</h1>
+      <div class="lead-meta">최종 업데이트: 2026년 10월 14일</div>
+
+<p>온라인으로 결제를 받으면 결제 대행사가 수수료를 떼고 남은 금액을 정산합니다. 수수료는 보통 <strong>결제 금액의 일정 비율 + 건당 고정 금액</strong>으로 구성됩니다. 이 글은 Stripe와 PayPal의 기본 구조를 정리하고, 같은 수수료율이라도 금액에 따라 부담이 달라지는 이유와 청구액을 역산하는 방법을 설명합니다.</p>
+
+<h2>1. 기본 수수료 (미국 사업자, 2026-10-14 공식 페이지 확인)</h2>
+<table>
+<thead><tr><th></th><th>국내 카드 기본</th><th>해외 발행 카드</th><th>환전이 필요한 경우</th></tr></thead>
+<tbody>
+<tr><td>Stripe</td><td>2.9% + $0.30</td><td>+1.5%</td><td>+1%</td></tr>
+<tr><td>PayPal 표준 결제</td><td>3.49% + $0.49</td><td>+1.5%</td><td>환전 스프레드 3~4%</td></tr>
+</tbody></table>
+<p>위 값은 <a href="https://stripe.com/pricing" rel="noopener" target="_blank">Stripe 요금 페이지</a>와 <a href="https://www.paypal.com/us/business/paypal-business-fees" rel="noopener" target="_blank">PayPal 수수료 페이지</a>에서 확인한 시점의 표준 요율입니다. 국가, 사업자 유형, 협의 요금, 결제 수단에 따라 달라지고 바뀔 수 있습니다. Shopify Payments 등 다른 서비스는 요금제에 따라 달라서 여기서는 숫자를 싣지 않았습니다.</p>
+
+<h2>2. 금액이 작을수록 실효 수수료율이 높아집니다</h2>
+<p>고정 수수료는 금액과 상관없이 건당 붙기 때문에 작은 결제일수록 비중이 커집니다. Stripe 국내 카드 기준으로 계산하면 다음과 같습니다.</p>
+<div class="ex-box">
+<ul>
+<li>$10 결제: 10 × 2.9% + 0.30 = $0.59 → 실효 <strong>5.9%</strong></li>
+<li>$100 결제: 100 × 2.9% + 0.30 = $3.20 → 실효 <strong>3.2%</strong></li>
+<li>$1,000 결제: 1,000 × 2.9% + 0.30 = $29.30 → 실효 <strong>2.93%</strong></li>
+</ul>
+</div>
+<p>소액 상품을 판다면 표면 수수료율(2.9%)보다 실효 수수료율을 기준으로 가격을 정해야 합니다.</p>
+
+<h2>3. 받고 싶은 금액에서 청구액을 역산하기</h2>
+<p>수수료를 떼고 정확히 $100을 받고 싶다면 $100만 청구해서는 안 됩니다. 수수료 자체에도 비율이 붙기 때문에 다음과 같이 계산합니다.</p>
+<div class="ex-box">
+<p><strong>청구액 = (받고 싶은 금액 + 고정 수수료) ÷ (1 − 수수료율)</strong></p>
+<p>Stripe 국내 카드로 $100을 받으려면: (100 + 0.30) ÷ (1 − 0.029) = <strong>약 $103.30</strong></p>
+</div>
+<p>$103.30을 청구하면 수수료는 103.30 × 2.9% + 0.30 = 약 $3.30이고, 정산액은 약 $100.00이 됩니다. 이 사이트의 <a href="../tools/stripe-fee.html">결제 수수료 계산기</a>가 같은 식으로 역산을 계산합니다.</p>
+
+<h2>4. 환전이 낀 결제</h2>
+<p>고객의 통화와 내 정산 통화가 다르면 환전 수수료가 추가됩니다. Stripe는 표준 요율에 +1%를 더하는 방식이고, PayPal은 환율에 3~4%의 스프레드를 얹는 방식으로 알려져 있어 표현 방식이 다릅니다. 둘을 단순히 숫자만 보고 비교하지 말고 실제로 정산받는 금액으로 비교하세요.</p>
+
+<h2>5. 계산에 들어가지 않는 비용</h2>
+<ul>
+<li>분쟁(차지백) 수수료: 분쟁이 생기면 별도 수수료가 붙을 수 있습니다. 금액은 각 사 약관에서 확인하세요.</li>
+<li>입금(출금) 수수료와 즉시 입금 수수료</li>
+<li>세금과 은행 수수료, 환율 변동</li>
+</ul>
+<div class="ex-note">이 글은 일반적인 정보를 정리한 참고 자료이며 세무·법률·통관 자문이 아닙니다. 개인 상황에 따라 달라지므로 정확한 내용은 공식 기관의 안내나 전문가를 통해 확인하세요.</div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div style="max-width: var(--container-max); margin: 24px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-tertiary); line-height: 1.8;">
+      캔두코리아 (CANDO KOREA) | 대표: 조윤서 | 사업자등록번호: 885-32-01361 | 통신판매업신고: 제 2023-성남분당A-0874 호<br>
+      사업장 소재지: 경기도 성남시 분당구 대왕판교로645번길 12, 7층 44호(삼평동, 경기창조경제혁신센터) | 전화: 010-8186-0010 | 이메일: hello@mazastudio.kr
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 MAZA US Tools by 캔두코리아. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

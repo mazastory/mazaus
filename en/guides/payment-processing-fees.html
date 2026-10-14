@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Online Payment Fees: Fixed Fees, International Cards, Currency Conversion, and Reverse Invoicing | MAZA US Tools</title>
+  <meta name="description" content="How Stripe and PayPal fees are structured, why small payments carry a higher effective rate, how currency conversion is charged, and how to work out what to invoice to net a target amount.">
+  <link rel="canonical" href="https://mazaus.com/en/guides/payment-processing-fees.html">
+  <link rel="alternate" hreflang="ko" href="https://mazaus.com/guides/payment-processing-fees.html">
+  <link rel="alternate" hreflang="en" href="https://mazaus.com/en/guides/payment-processing-fees.html">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8780016535760164" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
+
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/gnb.css">
+
+  <style>
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 60px; }
+    .doc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      line-height: 1.8;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+    }
+    .doc-box h1 { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 20px; }
+    .doc-box h2 { font-size: 18px; font-weight: 800; color: #93c5fd; margin: 28px 0 10px; }
+    .doc-box p { margin-bottom: 12px; }
+    .eco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+    .eco-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+    .eco-card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+    .eco-card h3 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .eco-card p { font-size: 12.5px; color: var(--text-tertiary); margin: 0; }
+
+    .doc-box table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0 16px; }
+    .doc-box th, .doc-box td { border: 1px solid var(--border-subtle); padding: 8px 10px; text-align: left; }
+    .doc-box th { color: #fff; background: rgba(255,255,255,0.04); }
+    .doc-box ul, .doc-box ol { padding-left: 22px; margin: 0 0 12px; }
+    .doc-box li { margin-bottom: 6px; }
+    .doc-box a { color: #93c5fd; text-decoration: underline; }
+    .doc-box .ex-box { background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px; margin: 12px 0 16px; }
+    .doc-box .ex-note { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.35); color: #fde68a; border-radius: 12px; padding: 12px 16px; margin: 20px 0 0; font-size: 13.5px; line-height: 1.7; }
+    .doc-box .lead-meta { font-size: 13px; color: var(--text-tertiary); margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+
+  <!-- ═══════ UNIFIED SINGLE GNB ═══════ -->
+  <nav class="gnb" role="navigation" aria-label="Main Navigation">
+    <a href="../" class="gnb-brand" aria-label="MAZA US Tools Home">
+      <div class="gnb-logo-symbol">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="gnb-logo-row">
+        <span class="gnb-logo-text"><span style="color:#fff;">MAZA</span> <span class="text-gradient-blue">US</span></span>
+        <span class="gnb-ko-tag">Tools</span>
+      </div>
+    </a>
+
+    <div class="gnb-links">
+      <a href="../" class="gnb-link">
+        <i data-lucide="shopping-cart"></i>
+        <span>Amazon FBA</span>
+      </a>
+      <a href="../tools/us-paycheck.html" class="gnb-link">
+        <i data-lucide="dollar-sign"></i>
+        <span>US Paycheck</span>
+      </a>
+      <a href="../tools/stripe-fee.html" class="gnb-link">
+        <i data-lucide="credit-card"></i>
+        <span>Stripe Fee</span>
+      </a>
+      <a href="../tools/unit-converter.html" class="gnb-link">
+        <i data-lucide="ruler"></i>
+        <span>Unit Converter</span>
+      </a>
+      <a href="../tools/invoice-generator.html" class="gnb-link">
+        <i data-lucide="file-text"></i>
+        <span>Invoice</span>
+      </a>
+    </div>
+
+    <div class="gnb-right">
+      <a href="../../guides/payment-processing-fees.html" class="lang-toggle-btn" title="한국어로 전환">
+        <span>🇰🇷 한국어</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="page-wrap">
+    <article class="doc-box">
+      <h1>Understanding Online Payment Fees: Fixed Fees, International Cards, Currency Conversion, and Reverse Invoicing</h1>
+      <div class="lead-meta">Last updated: October 14, 2026</div>
+
+<p>When you accept online payments, the processor deducts a fee and pays out the rest. The fee is usually <strong>a percentage of the payment plus a fixed amount per transaction</strong>. This article lays out the basic structure for Stripe and PayPal, explains why the same percentage costs more on small payments, and shows how to work out what to charge.</p>
+
+<h2>1. Standard fees (US business, checked on official pages on 2026-10-14)</h2>
+<table>
+<thead><tr><th></th><th>Domestic card</th><th>International card</th><th>If currency conversion is needed</th></tr></thead>
+<tbody>
+<tr><td>Stripe</td><td>2.9% + $0.30</td><td>+1.5%</td><td>+1%</td></tr>
+<tr><td>PayPal standard checkout</td><td>3.49% + $0.49</td><td>+1.5%</td><td>3–4% conversion spread</td></tr>
+</tbody></table>
+<p>These are standard rates as shown on the <a href="https://stripe.com/pricing" rel="noopener" target="_blank">Stripe pricing page</a> and the <a href="https://www.paypal.com/us/business/paypal-business-fees" rel="noopener" target="_blank">PayPal fees page</a> at the time of checking. They vary by country, business type, negotiated pricing and payment method, and can change. Other services such as Shopify Payments depend on your plan, so no figures are given here.</p>
+
+<h2>2. Small payments have a higher effective rate</h2>
+<p>The fixed fee is charged per transaction regardless of size, so it weighs more on small payments. For Stripe domestic cards:</p>
+<div class="ex-box">
+<ul>
+<li>$10 payment: 10 × 2.9% + 0.30 = $0.59 → effective <strong>5.9%</strong></li>
+<li>$100 payment: 100 × 2.9% + 0.30 = $3.20 → effective <strong>3.2%</strong></li>
+<li>$1,000 payment: 1,000 × 2.9% + 0.30 = $29.30 → effective <strong>2.93%</strong></li>
+</ul>
+</div>
+<p>If you sell low-priced items, price them using the effective rate rather than the headline 2.9%.</p>
+
+<h2>3. Working backward from the amount you want to receive</h2>
+<p>To net exactly $100 after fees, you cannot simply charge $100, because the fee itself is also a percentage of what you charge:</p>
+<div class="ex-box">
+<p><strong>Amount to charge = (target amount + fixed fee) ÷ (1 − fee rate)</strong></p>
+<p>To net $100 on Stripe with a domestic card: (100 + 0.30) ÷ (1 − 0.029) = <strong>about $103.30</strong></p>
+</div>
+<p>Charging $103.30 gives a fee of 103.30 × 2.9% + 0.30 = about $3.30 and a payout of about $100.00. The <a href="../tools/stripe-fee.html">payment fee calculator</a> on this site uses the same formula.</p>
+
+<h2>4. Payments involving currency conversion</h2>
+<p>If your customer's currency differs from your payout currency, a conversion fee is added. Stripe adds +1% to its standard rate, while PayPal applies a 3–4% spread on the exchange rate, so they are expressed differently. Compare them by the amount you actually receive, not by the headline figures.</p>
+
+<h2>5. Costs not in the calculation</h2>
+<ul>
+<li>Dispute (chargeback) fees — check each provider's terms for the amount.</li>
+<li>Payout fees and instant-payout fees.</li>
+<li>Taxes, bank fees and exchange-rate movements.</li>
+</ul>
+<div class="ex-note">This article is general information, not tax, legal or customs advice. Your situation may differ — check official guidance or a qualified professional.</div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div style="max-width: var(--container-max); margin: 24px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-tertiary); line-height: 1.8;">
+      CANDO KOREA | CEO: Yoonseo Cho | Business Reg: 885-32-01361 | E-Commerce License: 2023-Seongnam Bundang-0874<br>
+      Address: 7F #44, 12, Daewangpangyo-ro 645beon-gil, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic of Korea | Tel: +82-10-8186-0010 | Email: hello@mazastudio.kr
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 MAZA US Tools by CANDO KOREA. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

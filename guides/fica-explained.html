@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FICA 쉽게 이해하기: 사회보장세, 메디케어세, 소득 상한 (2026) | MAZA US Tools</title>
+  <meta name="description" content="미국 급여에서 빠지는 FICA의 구성(사회보장세 6.2%, 메디케어세 1.45%), 2026년 소득 상한 $184,500, 추가 메디케어세 0.9%를 예시와 함께 정리했습니다.">
+  <link rel="canonical" href="https://mazaus.com/guides/fica-explained.html">
+  <link rel="alternate" hreflang="ko" href="https://mazaus.com/guides/fica-explained.html">
+  <link rel="alternate" hreflang="en" href="https://mazaus.com/en/guides/fica-explained.html">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8780016535760164" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.344.0"></script>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/gnb.css">
+
+  <style>
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 60px; }
+    .doc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      line-height: 1.8;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+    }
+    .doc-box h1 { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 20px; }
+    .doc-box h2 { font-size: 18px; font-weight: 800; color: #93c5fd; margin: 28px 0 10px; }
+    .doc-box p { margin-bottom: 12px; }
+    .eco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+    .eco-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+    .eco-card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+    .eco-card h3 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .eco-card p { font-size: 12.5px; color: var(--text-tertiary); margin: 0; }
+
+    .doc-box table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0 16px; }
+    .doc-box th, .doc-box td { border: 1px solid var(--border-subtle); padding: 8px 10px; text-align: left; }
+    .doc-box th { color: #fff; background: rgba(255,255,255,0.04); }
+    .doc-box ul, .doc-box ol { padding-left: 22px; margin: 0 0 12px; }
+    .doc-box li { margin-bottom: 6px; }
+    .doc-box a { color: #93c5fd; text-decoration: underline; }
+    .doc-box .ex-box { background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px; margin: 12px 0 16px; }
+    .doc-box .ex-note { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.35); color: #fde68a; border-radius: 12px; padding: 12px 16px; margin: 20px 0 0; font-size: 13.5px; line-height: 1.7; }
+    .doc-box .lead-meta { font-size: 13px; color: var(--text-tertiary); margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+
+  <!-- ═══════ UNIFIED SINGLE GNB ═══════ -->
+  <nav class="gnb" role="navigation" aria-label="메인 네비게이션">
+    <a href="../" class="gnb-brand" aria-label="MAZA US Tools 홈">
+      <div class="gnb-logo-symbol">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="gnb-logo-row">
+        <span class="gnb-logo-text">
+          <span style="color:#fff;">MAZA</span> <span class="text-gradient-blue">US</span>
+        </span>
+        <span class="gnb-ko-tag">Tools</span>
+      </div>
+    </a>
+
+    <div class="gnb-links">
+      <a href="../" class="gnb-link">
+        <i data-lucide="shopping-cart"></i>
+        <span>아마존 FBA</span>
+      </a>
+      <a href="../tools/us-paycheck.html" class="gnb-link">
+        <i data-lucide="dollar-sign"></i>
+        <span>미국 연봉 계산기</span>
+      </a>
+      <a href="../tools/stripe-fee.html" class="gnb-link">
+        <i data-lucide="credit-card"></i>
+        <span>스트라이프 수수료</span>
+      </a>
+      <a href="../tools/unit-converter.html" class="gnb-link">
+        <i data-lucide="ruler"></i>
+        <span>단위·사이즈 변환</span>
+      </a>
+      <a href="../tools/invoice-generator.html" class="gnb-link">
+        <i data-lucide="file-text"></i>
+        <span>영문 인보이스</span>
+      </a>
+    </div>
+
+    <div class="gnb-right">
+      <a href="../en/guides/fica-explained.html" class="lang-toggle-btn" title="Switch to English">
+        <span>🇺🇸 English</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="page-wrap">
+    <article class="doc-box">
+      <h1>FICA 쉽게 이해하기: 사회보장세, 메디케어세, 소득 상한 (2026)</h1>
+      <div class="lead-meta">최종 업데이트: 2026년 10월 14일</div>
+
+<p>미국 급여명세서에서 연방 소득세와 별도로 빠지는 항목이 <strong>FICA</strong>(Federal Insurance Contributions Act)입니다. 사회보장세와 메디케어세를 합친 것으로, 은퇴·장애·유족 급여와 노인 의료보험을 위한 세금입니다. 이 글은 FICA의 구성과 2026년의 소득 상한, 고소득자에게 붙는 추가 세금을 정리합니다.</p>
+
+<h2>1. 두 가지로 구성됩니다</h2>
+<ul>
+  <li><strong>사회보장세(OASDI)</strong>: 근로자 부담 <strong>6.2%</strong>. 고용주도 같은 6.2%를 따로 냅니다.</li>
+  <li><strong>메디케어세</strong>: 근로자 부담 <strong>1.45%</strong>. 고용주도 같은 1.45%를 냅니다.</li>
+</ul>
+<p>근로자 몫만 합치면 7.65%입니다. 고용주가 내는 같은 금액은 근로자의 급여에서 빠지지 않습니다.</p>
+
+<h2>2. 사회보장세에는 소득 상한이 있습니다</h2>
+<p>사회보장세는 일정 금액까지의 급여에만 부과됩니다. 2026년 이 상한(Contribution and Benefit Base)은 <strong>$184,500</strong>입니다(미국 사회보장국 발표). 연봉이 이보다 많아도 사회보장세는 $184,500까지만 계산합니다. 상한까지 낼 때의 최대 금액은 $184,500 × 6.2% = <strong>$11,439</strong>입니다.</p>
+<p>메디케어세 1.45%에는 상한이 없습니다. 모든 급여에 부과됩니다.</p>
+
+<h2>3. 고소득자의 추가 메디케어세 0.9%</h2>
+<p>급여가 일정 금액을 넘으면 넘는 부분에 <strong>추가 메디케어세 0.9%</strong>가 붙습니다. 기준은 신고 유형에 따라 다르고(단독 신고 $200,000, 부부 합산 $250,000 등), 고용주는 한 해 급여가 $200,000을 넘는 시점부터 신고 유형과 상관없이 원천징수합니다. 이 추가 세금은 근로자만 부담하며 고용주의 몫은 없습니다.</p>
+
+<h2>4. 계산 예시</h2>
+<div class="ex-box">
+<p><strong>연봉 $100,000</strong></p>
+<ul>
+<li>사회보장세: 100,000 × 6.2% = $6,200</li>
+<li>메디케어세: 100,000 × 1.45% = $1,450</li>
+<li>FICA 합계: <strong>$7,650</strong></li>
+</ul>
+<p><strong>연봉 $250,000</strong></p>
+<ul>
+<li>사회보장세: 상한 $184,500 × 6.2% = $11,439</li>
+<li>메디케어세: 250,000 × 1.45% = $3,625</li>
+<li>추가 메디케어세: (250,000 − 200,000) × 0.9% = $450</li>
+<li>FICA 합계: <strong>$15,514</strong></li>
+</ul>
+</div>
+
+<h2>5. 자영업자는 어떻게 다른가요</h2>
+<p>직원이 아니라 본인 사업으로 소득을 얻는 자영업자는 근로자와 고용주 몫을 모두 부담합니다. 사회보장 부분이 12.4%(상한은 같음), 메디케어 부분이 2.9%입니다. 이 글의 계산 예시와 이 사이트의 계산기는 <strong>직원(W-2)</strong>을 기준으로 하며 자영업자 세금은 다루지 않습니다.</p>
+
+<h2>6. 연방 소득세와의 차이</h2>
+<p>FICA는 표준공제를 빼기 전의 <strong>총급여</strong>에 부과되고, 연방 소득세는 공제를 뺀 <strong>과세 소득</strong>에 구간별로 부과됩니다. 그래서 같은 연봉이라도 두 세금의 계산 기반이 다릅니다. 연방 소득세는 <a href="./us-federal-tax-brackets-2026.html">연방 소득세 구간 글</a>에서 설명합니다.</p>
+<p>이 사이트의 <a href="../tools/us-paycheck.html">미국 연봉 실수령액 계산기</a>는 위 방식으로 FICA를 계산합니다.</p>
+<p>출처: <a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener" target="_blank">SSA Contribution and Benefit Base</a>, <a href="https://www.irs.gov/taxtopics/tc751" rel="noopener" target="_blank">IRS Topic 751</a></p>
+<div class="ex-note">이 글은 일반적인 정보를 정리한 참고 자료이며 세무·법률·통관 자문이 아닙니다. 개인 상황에 따라 달라지므로 정확한 내용은 공식 기관의 안내나 전문가를 통해 확인하세요.</div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div style="max-width: var(--container-max); margin: 24px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-tertiary); line-height: 1.8;">
+      캔두코리아 (CANDO KOREA) | 대표: 조윤서 | 사업자등록번호: 885-32-01361 | 통신판매업신고: 제 2023-성남분당A-0874 호<br>
+      사업장 소재지: 경기도 성남시 분당구 대왕판교로645번길 12, 7층 44호(삼평동, 경기창조경제혁신센터) | 전화: 010-8186-0010 | 이메일: hello@mazastudio.kr
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 MAZA US Tools by 캔두코리아. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
