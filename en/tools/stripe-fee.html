@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Stripe &amp; PayPal Fee Calculator (2026 Updated) | MAZA US Tools</title>
-  <meta name="description" content="Calculate real-time Stripe, PayPal, and Shopify Payments transaction processing fees, cross-border margins, and exact net payout. Includes invoice reverse fee calculator.">
+  <meta name="description" content="Calculate Stripe, PayPal, and Shopify Payments transaction processing fees, cross-border margins, and exact net payout. Includes invoice reverse fee calculator.">
   <meta name="keywords" content="Stripe fee calculator, PayPal fee calculator, payment processing fees, reverse invoice fee calculator, Shopify payments fee, merchant transaction cost">
 
   <!-- Hreflang -->
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MAZA US Tools">
   <meta property="og:title" content="Stripe &amp; PayPal Fee Calculator | MAZA US">
-  <meta property="og:description" content="Calculate real-time payment processing fees, cross-border margins, and exact net payout.">
+  <meta property="og:description" content="Calculate payment processing fees, cross-border margins, and exact net payout.">
   <meta property="og:url" content="https://mazaus.com/en/tools/stripe-fee.html">
   <meta property="og:locale" content="en_US">
 
@@ -30,7 +30,7 @@
     "@type": "WebApplication",
     "name": "Stripe & PayPal Fee Calculator",
     "url": "https://mazaus.com/en/tools/stripe-fee.html",
-    "description": "Real-time payment gateway processing fee and net payout calculator",
+    "description": "payment gateway processing fee and net payout calculator",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web Browser",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -240,6 +240,15 @@
             <option value="fx">Currency Conversion (+1.0% ~ 2.0%)</option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="customPct">Custom fee rate (%, optional)</label>
+          <input type="number" id="customPct" class="form-input" step="0.01" min="0" max="99" placeholder="Leave blank to use the preset" oninput="calculate()">
+        </div>
+        <div class="form-group">
+          <label for="customFixed">Custom fixed fee ($, optional)</label>
+          <input type="number" id="customFixed" class="form-input" step="0.01" min="0" placeholder="Leave blank to use the preset" oninput="calculate()">
+        </div>
+
       </div>
 
       <div class="result-hero">
@@ -275,7 +284,7 @@
       </div>
     </div>
 
-    <!-- 1500+ Words Practical E-E-A-T Guide -->
+    <!-- Guide -->
     <article class="card-box" style="background:rgba(255,255,255,0.02); line-height:1.8;">
       <h2 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">
         <i data-lucide="book-open" style="width:20px;height:20px;color:#3b82f6;"></i>
@@ -331,6 +340,24 @@
       </p>
     </article>
   </main>
+  <section class="explainer" aria-label="Payment fee calculator explained">
+    <h2>How the payment fee calculator works</h2>
+    <div class="ex-box">
+      <p><strong>Total fee</strong> = amount × fee rate + fixed fee</p>
+      <p><strong>Net payout</strong> = amount − total fee</p>
+      <p><strong>Invoice to charge</strong> = (amount you want to receive + fixed fee) ÷ (1 − fee rate)</p>
+    </div>
+    <h3>Worked example</h3>
+    <p>A $100 payment with a US domestic card on Stripe costs 100 × 2.9% + $0.30 = <strong>$3.20</strong>, leaving <strong>$96.80</strong>. To receive exactly $100 after fees, you would charge (100 + 0.30) ÷ (1 − 0.029) = <strong>about $103.30</strong>.</p>
+    <h3>Where the default rates come from</h3>
+    <ul>
+      <li><strong>Stripe</strong>: US domestic cards 2.9% + $0.30, international cards +1.5%, currency conversion +1%. Checked on Stripe's official pricing page on 2026-10-14.</li>
+      <li><strong>PayPal</strong>: standard checkout 3.49% + $0.49, international +1.5%, currency conversion spread 3–4% (this tool uses the lower 3%). Checked on PayPal's official fees page on 2026-10-14.</li>
+      <li><strong>Shopify Payments</strong>: varies by plan, so the values here are reference only.</li>
+    </ul>
+    <p>Fees vary by country, business type and negotiated pricing, and can change. If you know your own rate, enter it in the <strong>custom fee</strong> fields. Dispute fees, payout fees and taxes are not included.</p>
+  </section>
+
 
   <!-- Official Footer -->
   <footer class="site-footer">
@@ -417,12 +444,12 @@
         pct = 0.029;
         fixed = 0.30;
         if (txType === 'international') pct += 0.015;
-        if (txType === 'fx') pct += 0.025;
+        if (txType === 'fx') pct += 0.01;   // Stripe 환전 수수료 +1% (공식 요금 페이지)
       } else if (curPG === 'paypal') {
         pct = 0.0349;
         fixed = 0.49;
         if (txType === 'international') pct += 0.015;
-        if (txType === 'fx') pct += 0.035;
+        if (txType === 'fx') pct += 0.03;   // PayPal 환전 스프레드 3~4% 중 낮은 쪽
       } else if (curPG === 'shopify') {
         pct = 0.027;
         fixed = 0.30;
@@ -430,6 +457,11 @@
         if (txType === 'fx') pct += 0.020;
       }
 
+      // 직접 입력한 수수료율·고정 수수료가 있으면 그 값을 쓴다
+      const cp = parseFloat(String(document.getElementById('customPct').value).replace(',', '.'));
+      if (isFinite(cp) && cp >= 0 && cp < 100) pct = cp / 100;
+      const cf = parseFloat(String(document.getElementById('customFixed').value).replace(',', '.'));
+      if (isFinite(cf) && cf >= 0) fixed = cf;
       const percentFee = amount * pct;
       const totalFee = percentFee + fixed;
       const netPayout = Math.max(0, amount - totalFee);

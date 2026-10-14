@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>US Paycheck &amp; State Salary Take-Home Tax Calculator (2026) | MAZA US Tools</title>
-  <meta name="description" content="Calculate real-time net take-home salary after Federal Income Tax, FICA (Social Security &amp; Medicare), and state taxes across all 50 US states. 100% free browser tool.">
+  <meta name="description" content="Calculate net take-home salary after Federal Income Tax, FICA (Social Security &amp; Medicare), and state taxes across all 50 US states. 100% free browser tool.">
   <meta name="keywords" content="US paycheck calculator, salary take-home pay, federal tax calculator, California paycheck tax, Texas salary no tax, FICA tax deduction">
 
   <!-- Hreflang -->
@@ -266,6 +266,27 @@
       </p>
     </article>
   </main>
+  <section class="explainer" aria-label="US paycheck estimate explained">
+    <h2>How the US take-home estimate works</h2>
+    <p>This calculator estimates take-home pay by subtracting federal income tax, FICA (Social Security and Medicare), and a rough state tax from your salary. It is a <strong>simplified estimate</strong>, not an exact payroll withholding figure.</p>
+    <h3>Assumptions</h3>
+    <ul>
+      <li>Filing status is <strong>Single</strong> with only the 2026 standard deduction of <strong>$16,100</strong>.</li>
+      <li>Federal tax uses the 2026 brackets applied to taxable income: 10% up to $12,400; 12% up to $50,400; 22% up to $105,700; 24% up to $201,775; 32% up to $256,225; 35% up to $640,600; 37% above. Source: IRS Rev. Proc. 2025-32.</li>
+      <li>FICA is 6.2% Social Security on wages up to the 2026 base of $184,500, plus 1.45% Medicare, plus an additional 0.9% Medicare on wages above $200,000.</li>
+      <li>State tax is a <strong>single approximate rate</strong> applied to the full salary. Real state tax rules use brackets and deductions and can differ a lot.</li>
+    </ul>
+    <h3>Worked example</h3>
+    <p>For a $100,000 salary in a state with no income tax: taxable income is 100,000 − 16,100 = 83,900. Federal tax is 12,400 × 10% + 38,000 × 12% + 33,500 × 22% = 1,240 + 4,560 + 7,370 = <strong>$13,170</strong>. FICA is 6,200 + 1,450 = <strong>$7,650</strong>. Take-home is about <strong>$79,180</strong> a year, or about <strong>$6,598</strong> a month.</p>
+    <h3>Not included</h3>
+    <ul>
+      <li>401(k) and health insurance deductions, and tax credits</li>
+      <li>Other filing statuses, city or county taxes</li>
+      <li>Self-employment tax</li>
+    </ul>
+    <p>Your actual tax depends on your situation. Check IRS guidance or a tax professional for exact figures.</p>
+  </section>
+
 
   <!-- Official Footer -->
   <footer class="site-footer">
@@ -335,14 +356,21 @@
       const gross = parseFloat(document.getElementById('grossSalary').value) || 0;
       const stateRate = parseFloat(document.getElementById('stateSelect').value) || 0;
 
-      let fedRate = 0.10;
-      if (gross > 45000) fedRate = 0.12;
-      if (gross > 95000) fedRate = 0.155;
-      if (gross > 180000) fedRate = 0.21;
-      if (gross > 300000) fedRate = 0.27;
-
-      const fed = Math.round(gross * fedRate);
-      const fica = Math.round(gross * 0.0765);
+      // 2026 연방 소득세(단독 신고·표준공제) — IRS Rev. Proc. 2025-32 기준.
+      // 주 소득세는 선택한 주의 대략적인 단일 세율로 추정한다(실제 주 세법과 다를 수 있음).
+      const STD_DEDUCTION = 16100;
+      const BRACKETS = [[12400, 0.10], [50400, 0.12], [105700, 0.22], [201775, 0.24], [256225, 0.32], [640600, 0.35], [Infinity, 0.37]];
+      const taxable = Math.max(0, gross - STD_DEDUCTION);
+      let fedTax = 0, lower = 0;
+      for (const [upper, rate] of BRACKETS) {
+        if (taxable > lower) fedTax += (Math.min(taxable, upper) - lower) * rate;
+        lower = upper;
+      }
+      const fed = Math.round(fedTax);
+      // FICA: 사회보장 6.2%(2026년 소득 상한 $184,500) + 메디케어 1.45% + 고소득 추가 메디케어 0.9%($200,000 초과분)
+      const ss = Math.min(gross, 184500) * 0.062;
+      const medicare = gross * 0.0145 + Math.max(0, gross - 200000) * 0.009;
+      const fica = Math.round(ss + medicare);
       const state = Math.round(gross * stateRate);
 
       const totalDeductions = fed + fica + state;

@@ -350,3 +350,14 @@ img {
     align-items: flex-start;
   }
 }
+
+/* ── 도구 설명 글 (2026-10-14) ── */
+.explainer { max-width: 860px; margin: 56px auto 24px; padding: 0 20px; color: var(--text-secondary, #cbd5e1); line-height: 1.85; font-size: 15px; }
+.explainer h2 { color: var(--text-primary, #fff); font-size: 22px; margin: 0 0 14px; }
+.explainer h3 { color: var(--text-primary, #fff); font-size: 16px; margin: 26px 0 8px; }
+.explainer p, .explainer li { margin: 0 0 10px; }
+.explainer ul, .explainer ol { padding-left: 20px; margin: 0 0 12px; }
+.explainer code { background: rgba(255,255,255,0.07); padding: 1px 6px; border-radius: 5px; font-size: 13px; }
+.explainer .ex-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 16px 18px; margin: 12px 0 16px; }
+.explainer a { color: #93c5fd; text-decoration: underline; }
+.explainer-note { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.35); color: #fde68a; border-radius: 12px; padding: 12px 16px; margin: 14px 0 18px; font-size: 14px; line-height: 1.7; }

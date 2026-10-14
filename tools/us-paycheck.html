@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>미국 주별 연봉 실수령액 계산기 (2026 최신) | MAZA US Tools</title>
-  <meta name="description" content="미국 연봉(Annual Salary)을 입력하면 2026년 연방 소득세(Federal), 사회보장/메디케어(FICA 7.65%), 주별 소득세(State Tax)를 공제한 월·연간 세후 실수령액(Take-Home Pay)을 실시간으로 계산합니다.">
+  <title>미국 주별 연봉 실수령액 계산기  | MAZA US Tools</title>
+  <meta name="description" content="미국 연봉(Annual Salary)을 입력하면 2026년 연방 소득세(Federal), 사회보장/메디케어(FICA 7.65%), 주별 소득세(State Tax)를 공제한 월·연간 세후 실수령액(Take-Home Pay)을 계산합니다.">
   <meta name="keywords" content="미국 연봉 실수령액, 미국 세금 계산기, US paycheck calculator, 캘리포니아 세금 계산기, 텍사스 소득세, 미국 취업 연봉, FICA 세금">
 
   <!-- Hreflang -->
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MAZA US Tools">
   <meta property="og:title" content="미국 주별 연봉 실수령액 계산기 | MAZA US">
-  <meta property="og:description" content="2026 연방 소득세, FICA, 주 소득세 공제 후 월 실수령액 실시간 계산">
+  <meta property="og:description" content="2026 연방 소득세, FICA, 주 소득세 공제 후 월 실수령액 바로 계산">
   <meta property="og:url" content="https://mazaus.com/tools/us-paycheck.html">
   <meta property="og:locale" content="ko_KR">
 
@@ -199,15 +199,15 @@
               <option value="0">알래스카 (Alaska - 0%)</option>
               <option value="0">사우스다코타 (South Dakota - 0%)</option>
             </optgroup>
-            <optgroup label="주요 주 소득세율 (Major States)">
-              <option value="0.093">캘리포니아 (California - 최고 9.3%~13.3%)</option>
-              <option value="0.065">뉴욕 (New York - 약 6.5%)</option>
+            <optgroup label="주요 주 (대략적인 단일 세율 추정)">
+              <option value="0.093">캘리포니아 (California - 약 9.3% 가정)</option>
+              <option value="0.065">뉴욕 (New York - 약 6.5% 가정)</option>
               <option value="0.0495">일리노이 (Illinois - 고정 4.95%)</option>
-              <option value="0.05">조지아 (Georgia - 5.0%)</option>
+              <option value="0.05">조지아 (Georgia - 약 5%)</option>
               <option value="0.055">뉴저지 (New Jersey - 약 5.5%)</option>
               <option value="0.05">매사추세츠 (Massachusetts - 고정 5.0%)</option>
               <option value="0.0575">버지니아 (Virginia - 최고 5.75%)</option>
-              <option value="0.045">노스캐롤라이나 (North Carolina - 4.5%)</option>
+              <option value="0.04">노스캐롤라이나 (North Carolina - 약 4%)</option>
             </optgroup>
           </select>
         </div>
@@ -271,6 +271,27 @@
       </ul>
     </article>
   </main>
+  <section class="explainer" aria-label="미국 연봉 실수령액 계산기 설명">
+    <h2>미국 연봉 실수령액은 이렇게 추정합니다</h2>
+    <p>이 계산기는 연봉에서 연방 소득세, FICA(사회보장세·메디케어세), 주 소득세를 뺀 대략적인 실수령액을 추정합니다. 정확한 원천징수액이 아니라 <strong>단순한 가정으로 만든 추정치</strong>입니다.</p>
+    <h3>적용한 가정</h3>
+    <ul>
+      <li>신고 유형은 <strong>단독 신고(Single)</strong>이고, 공제는 2026년 표준공제 <strong>$16,100</strong>만 적용합니다.</li>
+      <li>연방 소득세율은 2026년 구간(10% ~ $12,400, 12% ~ $50,400, 22% ~ $105,700, 24% ~ $201,775, 32% ~ $256,225, 35% ~ $640,600, 37% 초과)을 과세 소득에 구간별로 적용합니다. 출처: IRS Rev. Proc. 2025-32.</li>
+      <li>FICA는 사회보장세 6.2%(2026년 소득 상한 $184,500까지)와 메디케어세 1.45%를 계산하고, 연봉이 $200,000을 넘으면 넘는 부분에 추가 메디케어세 0.9%를 더합니다.</li>
+      <li>주 소득세는 선택한 주의 <strong>대략적인 단일 세율</strong>을 연봉 전체에 곱한 값입니다. 실제 주 세법은 구간별 세율과 공제가 달라서 이 값과 차이가 큽니다.</li>
+    </ul>
+    <h3>계산 예시</h3>
+    <p>연봉 $100,000, 주 소득세가 없는 주라면: 과세 소득은 100,000 − 16,100 = 83,900이고, 연방 소득세는 12,400 × 10% + (50,400 − 12,400) × 12% + (83,900 − 50,400) × 22% = 1,240 + 4,560 + 7,370 = <strong>$13,170</strong>입니다. FICA는 100,000 × 6.2% + 100,000 × 1.45% = <strong>$7,650</strong>입니다. 실수령액은 연 <strong>$79,180</strong>, 월 약 <strong>$6,598</strong>입니다.</p>
+    <h3>반영하지 않는 것</h3>
+    <ul>
+      <li>401(k), 건강보험료 등 급여에서 빠지는 공제와 세액공제(자녀 공제 등)</li>
+      <li>부부 합산 신고, 세대주 신고 등 다른 신고 유형, 시·카운티 단위 세금</li>
+      <li>자영업자(Self-employed)의 세금 구조</li>
+    </ul>
+    <p>실제 세금은 개인 상황에 따라 달라집니다. 정확한 금액은 IRS 안내나 세무 전문가를 통해 확인하세요.</p>
+  </section>
+
 
   <!-- Official Footer -->
   <footer class="site-footer">
@@ -340,15 +361,21 @@
       const gross = parseFloat(document.getElementById('grossSalary').value) || 0;
       const stateRate = parseFloat(document.getElementById('stateSelect').value) || 0;
 
-      // Realistic 2026 progressive federal estimation
-      let fedRate = 0.10;
-      if (gross > 45000) fedRate = 0.12;
-      if (gross > 95000) fedRate = 0.155;
-      if (gross > 180000) fedRate = 0.21;
-      if (gross > 300000) fedRate = 0.27;
-
-      const fed = Math.round(gross * fedRate);
-      const fica = Math.round(gross * 0.0765);
+      // 2026 연방 소득세(단독 신고·표준공제) — IRS Rev. Proc. 2025-32 기준.
+      // 주 소득세는 선택한 주의 대략적인 단일 세율로 추정한다(실제 주 세법과 다를 수 있음).
+      const STD_DEDUCTION = 16100;
+      const BRACKETS = [[12400, 0.10], [50400, 0.12], [105700, 0.22], [201775, 0.24], [256225, 0.32], [640600, 0.35], [Infinity, 0.37]];
+      const taxable = Math.max(0, gross - STD_DEDUCTION);
+      let fedTax = 0, lower = 0;
+      for (const [upper, rate] of BRACKETS) {
+        if (taxable > lower) fedTax += (Math.min(taxable, upper) - lower) * rate;
+        lower = upper;
+      }
+      const fed = Math.round(fedTax);
+      // FICA: 사회보장 6.2%(2026년 소득 상한 $184,500) + 메디케어 1.45% + 고소득 추가 메디케어 0.9%($200,000 초과분)
+      const ss = Math.min(gross, 184500) * 0.062;
+      const medicare = gross * 0.0145 + Math.max(0, gross - 200000) * 0.009;
+      const fica = Math.round(ss + medicare);
       const state = Math.round(gross * stateRate);
 
       const totalDeductions = fed + fica + state;

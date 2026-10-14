@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>스트라이프 &amp; 페이팔 결제 수수료 계산기 (2026 최신) | MAZA US Tools</title>
-  <meta name="description" content="Stripe, PayPal, Shopify Payments 결제 수수료 및 환전 수수료를 공제한 실제 정산액을 실시간으로 계산합니다. 목표 정산액 수령을 위한 역산 기능 지원.">
+  <title>스트라이프 &amp; 페이팔 결제 수수료 계산기  | MAZA US Tools</title>
+  <meta name="description" content="Stripe, PayPal, Shopify Payments 결제 수수료 및 환전 수수료를 공제한 실제 정산액을 계산합니다. 목표 정산액 수령을 위한 역산 기능 지원.">
   <meta name="keywords" content="스트라이프 수수료 계산기, Stripe fee calculator, 페이팔 수수료 계산기, 해외 결제 수수료, 쇼피파이 페이먼츠, 역마진 방지">
 
   <!-- Hreflang -->
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MAZA US Tools">
   <meta property="og:title" content="스트라이프 &amp; 페이팔 결제 수수료 계산기 | MAZA US">
-  <meta property="og:description" content="스트라이프, 페이팔 건당 수수료와 환전 마진 공제 후 실수령 정산액 실시간 계산">
+  <meta property="og:description" content="스트라이프, 페이팔 건당 수수료와 환전 마진 공제 후 실수령 정산액 바로 계산">
   <meta property="og:url" content="https://mazaus.com/tools/stripe-fee.html">
   <meta property="og:locale" content="ko_KR">
 
@@ -30,7 +30,7 @@
     "@type": "WebApplication",
     "name": "Stripe & PayPal 수수료 계산기",
     "url": "https://mazaus.com/tools/stripe-fee.html",
-    "description": "Stripe 및 PayPal 글로벌 PG 결제 수수료와 정산 실수령액을 실시간 계산하는 웹 도구",
+    "description": "Stripe 및 PayPal 글로벌 PG 결제 수수료와 정산 실수령액을 바로 계산하는 웹 도구",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web Browser",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -240,6 +240,15 @@
             <option value="fx">외화 환전 결제 (Currency Conversion +1%)</option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="customPct">수수료율 직접 입력 (%, 선택)</label>
+          <input type="number" id="customPct" class="form-input" step="0.01" min="0" max="99" placeholder="비워 두면 위의 기본값 사용" oninput="calculate()">
+        </div>
+        <div class="form-group">
+          <label for="customFixed">고정 수수료 직접 입력 ($, 선택)</label>
+          <input type="number" id="customFixed" class="form-input" step="0.01" min="0" placeholder="비워 두면 위의 기본값 사용" oninput="calculate()">
+        </div>
+
       </div>
 
       <div class="result-hero">
@@ -275,7 +284,7 @@
       </div>
     </div>
 
-    <!-- 1500+ Words Practical E-E-A-T Guide -->
+    <!-- 가이드 -->
     <article class="card-box" style="background:rgba(255,255,255,0.02); line-height:1.8;">
       <h2 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">
         <i data-lucide="book-open" style="width:20px;height:20px;color:#3b82f6;"></i>
@@ -286,7 +295,8 @@
         SaaS, 글로벌 이커머스, 해외 프리랜서 서비스를 운영할 때 결제 대행사(PG)의 수수료는 순이익률에 치명적인 영향을 미칩니다. 겉으로는 2.9%의 단순 수수료로 보이지만 국제 거래 및 환전 마진이 겹치면 실질 수수료는 5%를 훌쩍 넘어가게 됩니다.
       </p>
 
-      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">1. 주요 PG사별 2026 기본 수수료 비교</h3>
+      <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">1. 주요 PG사별 기본 수수료 비교</h3>
+      <div class="explainer-note">Stripe와 PayPal의 수치는 각 사의 공식 요금 페이지에서 2026-10-14에 확인한 값입니다. Shopify Payments는 요금제에 따라 달라 범위로 적은 참고값이며, 협의 요금이 적용되는 사업자는 다를 수 있습니다. 요금은 바뀔 수 있으니 각 사 요금 페이지에서 다시 확인하세요.</div>
       <div style="overflow-x:auto; margin:16px 0;">
         <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
           <thead>
@@ -302,7 +312,7 @@
               <td style="padding:10px; color:#fff; font-weight:700;">Stripe</td>
               <td style="padding:10px; text-align:center; color:var(--text-secondary);">2.9% + $0.30</td>
               <td style="padding:10px; text-align:center; color:var(--text-secondary);">4.4% + $0.30 (+1.5%)</td>
-              <td style="padding:10px; text-align:center; color:var(--text-secondary);">+1.0% ~ 2.0%</td>
+              <td style="padding:10px; text-align:center; color:var(--text-secondary);">+1.0%</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border-subtle);">
               <td style="padding:10px; color:#fff; font-weight:700;">PayPal Commerce</td>
@@ -327,10 +337,28 @@
 
       <h3 style="font-size:16px; color:#93c5fd; margin:24px 0 8px;">3. 차지백(Chargeback) 및 분쟁 비용 방어</h3>
       <p style="font-size:14px; color:var(--text-secondary);">
-        고객이 카드사에 결제 취소 분쟁을 제기할 경우 Stripe은 건당 <strong>$15</strong>, PayPal은 건당 <strong>$20</strong>의 분쟁 수수료를 즉시 출금합니다. 분쟁에서 승소하더라도 이 비용은 환급되지 않으므로, 3D Secure 2 인증과 투명한 환불 정책을 기재하여 차지백을 사전에 방지해야 합니다.
+        고객이 카드사에 결제 취소 분쟁을 제기할 경우 Stripe은 건당 약 <strong>$15</strong>, PayPal은 건당 약 <strong>$20</strong>(변경될 수 있음)의 분쟁 수수료를 즉시 출금합니다. 분쟁에서 승소하더라도 이 비용은 환급되지 않으므로, 3D Secure 2 인증과 투명한 환불 정책을 기재하여 차지백을 사전에 방지해야 합니다.
       </p>
     </article>
   </main>
+  <section class="explainer" aria-label="결제 수수료 계산기 설명">
+    <h2>결제 수수료 계산기는 이렇게 계산합니다</h2>
+    <div class="ex-box">
+      <p><strong>총 수수료</strong> = 결제 금액 × 수수료율 + 고정 수수료</p>
+      <p><strong>정산액</strong> = 결제 금액 − 총 수수료</p>
+      <p><strong>역산 청구액</strong> = (받고 싶은 금액 + 고정 수수료) ÷ (1 − 수수료율)</p>
+    </div>
+    <h3>계산 예시</h3>
+    <p>Stripe 미국 국내 카드로 $100을 받으면 수수료는 100 × 2.9% + $0.30 = <strong>$3.20</strong>, 정산액은 <strong>$96.80</strong>입니다. 반대로 수수료를 뺀 뒤 정확히 $100을 받고 싶다면 (100 + 0.30) ÷ (1 − 0.029) = <strong>약 $103.30</strong>을 청구해야 합니다.</p>
+    <h3>기본 수수료율의 출처</h3>
+    <ul>
+      <li><strong>Stripe</strong>: 미국 국내 카드 2.9% + $0.30, 해외 발행 카드 +1.5%, 환전이 필요하면 +1%. Stripe 공식 요금 페이지에서 2026-10-14에 확인했습니다.</li>
+      <li><strong>PayPal</strong>: 표준 결제 3.49% + $0.49, 해외 거래 +1.5%, 환전 스프레드 3~4%(이 계산기는 낮은 쪽인 3%를 사용). PayPal 공식 수수료 페이지에서 2026-10-14에 확인했습니다.</li>
+      <li><strong>Shopify Payments</strong>: 요금제에 따라 달라서 이 계산기의 값은 참고용입니다.</li>
+    </ul>
+    <p>수수료는 국가, 사업자 유형, 협의 요금에 따라 달라지고 바뀔 수 있습니다. 내 요금을 알고 있다면 <strong>'수수료율 직접 입력'</strong> 칸에 넣어 계산하세요. 분쟁(차지백) 수수료, 입금 수수료, 세금은 이 계산에 포함되지 않습니다.</p>
+  </section>
+
 
   <!-- Official Footer -->
   <footer class="site-footer">
@@ -417,12 +445,12 @@
         pct = 0.029;
         fixed = 0.30;
         if (txType === 'international') pct += 0.015;
-        if (txType === 'fx') pct += 0.025;
+        if (txType === 'fx') pct += 0.01;   // Stripe 환전 수수료 +1% (공식 요금 페이지)
       } else if (curPG === 'paypal') {
         pct = 0.0349;
         fixed = 0.49;
         if (txType === 'international') pct += 0.015;
-        if (txType === 'fx') pct += 0.035;
+        if (txType === 'fx') pct += 0.03;   // PayPal 환전 스프레드 3~4% 중 낮은 쪽
       } else if (curPG === 'shopify') {
         pct = 0.027;
         fixed = 0.30;
@@ -430,6 +458,11 @@
         if (txType === 'fx') pct += 0.020;
       }
 
+      // 직접 입력한 수수료율·고정 수수료가 있으면 그 값을 쓴다
+      const cp = parseFloat(String(document.getElementById('customPct').value).replace(',', '.'));
+      if (isFinite(cp) && cp >= 0 && cp < 100) pct = cp / 100;
+      const cf = parseFloat(String(document.getElementById('customFixed').value).replace(',', '.'));
+      if (isFinite(cf) && cf >= 0) fixed = cf;
       const percentFee = amount * pct;
       const totalFee = percentFee + fixed;
       const netPayout = Math.max(0, amount - totalFee);
