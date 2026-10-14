@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.mazaus.com"
+        }
+      ],
+      "destination": "https://mazaus.com/$1",
+      "permanent": true
+    }
+  ]
+}
